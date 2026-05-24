@@ -1,1 +1,118 @@
+/* ===================================================
+   GLOBAL STYLES — Caja Trujillo
+   =================================================== */
+
+/* Tailwind CSS v4 */
 @import "tailwindcss";
+
+/* Design System */
+@import "./tokens.css";
+@import "./animations.css";
+
+/* ===================================================
+   GOOGLE FONTS
+   Plus Jakarta Sans (headings): 600, 700, 800
+   Inter (body): 400, 500, 600
+   =================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap");
+
+/* ===================================================
+   RESET
+   =================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===================================================
+   BASE
+   =================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--gray-900);
+  background: var(--gray-50);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ===================================================
+   SKIP TO MAIN — Accesibilidad (visible solo en focus)
+   =================================================== */
+.skip-to-main {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 12px 24px;
+  background: var(--red-500);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-red);
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-to-main:focus-visible {
+  top: 16px;
+  outline: 2px solid var(--red-500);
+  outline-offset: 2px;
+}
+
+/* ===================================================
+   FOCUS VISIBLE GLOBAL — Accesibilidad teclado
+   =================================================== */
+:focus-visible {
+  outline: 2px solid var(--red-500);
+  outline-offset: 2px;
+}
+
+/* ===================================================
+   CONTAINER UTILITARIO
+   =================================================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}

@@ -1,2 +1,65 @@
-/* tokens.css — Design System de Caja Trujillo */
-/* Contenido se implementará en el Paso 3 */
+:root {
+  /* ===================================================
+     COLORES DE MARCA — OBLIGATORIOS, NO MODIFICAR
+     =================================================== */
+  --red-600:    #CC0700;
+  --red-500:    #FF0901;   /* Rojo Caja Trujillo — color primario */
+  --red-400:    #FF3B33;
+  --red-200:    #FFBDBB;
+  --red-100:    #FFE0DF;
+  --red-50:     #FFF5F5;
+
+  --yellow-600: #CC9B00;
+  --yellow-500: #FFC200;   /* Amarillo Caja Trujillo — acento/secundario */
+  --yellow-400: #FFD040;
+  --yellow-200: #FFE99A;
+  --yellow-100: #FFF6D0;
+  --yellow-50:  #FFFBEC;
+
+  /* ===================================================
+     NEUTROS — complementan rojo y amarillo
+     =================================================== */
+  --gray-950:  #0F0F12;   /* fondos oscuros: hero, footer, topbar */
+  --gray-900:  #1A1A1E;   /* texto principal */
+  --gray-800:  #2C2C32;
+  --gray-700:  #3E3E47;
+  --gray-600:  #5A5A66;   /* texto secundario */
+  --gray-500:  #7A7A88;
+  --gray-400:  #9E9EAC;   /* texto muted */
+  --gray-300:  #C2C2CC;
+  --gray-200:  #E0E0E8;   /* bordes */
+  --gray-100:  #F0F0F5;   /* fondos de iconos */
+  --gray-50:   #F7F7FA;   /* fondo base de página */
+  --white:     #FFFFFF;
+
+  /* ===================================================
+     TIPOGRAFÍA
+     =================================================== */
+  --font-head: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* ===================================================
+     BORDER RADII
+     =================================================== */
+  --r-sm:  6px;
+  --r-md:  10px;
+  --r-lg:  14px;
+  --r-xl:  20px;
+  --r-2xl: 28px;
+
+  /* ===================================================
+     SOMBRAS
+     =================================================== */
+  --shadow-xs:     0 1px 3px rgba(0,0,0,0.06);
+  --shadow-sm:     0 2px 8px rgba(0,0,0,0.07);
+  --shadow-md:     0 4px 20px rgba(0,0,0,0.09);
+  --shadow-lg:     0 10px 40px rgba(0,0,0,0.11);
+  --shadow-red:    0 4px 16px rgba(255,9,1,0.28);
+  --shadow-red-lg: 0 8px 32px rgba(255,9,1,0.32);
+  --shadow-yellow: 0 4px 14px rgba(255,194,0,0.30);
+
+  /* ===================================================
+     TRANSICIONES
+     =================================================== */
+  --transition: all 0.2s ease;
+}

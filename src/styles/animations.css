@@ -1,2 +1,57 @@
-/* animations.css — Animaciones y Intersection Observer */
-/* Contenido se implementará en el Paso 3 */
+/* ===================================================
+   ANIMACIONES DE REVELACIÓN (Intersection Observer)
+   =================================================== */
+
+/* Fade up — elementos que aparecen subiendo */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade in — elementos que aparecen sin movimiento */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+}
+
+/* ===================================================
+   KEYFRAMES DECORATIVOS
+   =================================================== */
+
+/* Float — movimiento suave de levitación (simulador, 404) */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Blink — parpadeo sutil (indicador en hero) */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.animate-blink {
+  animation: blink 2s ease-in-out infinite;
+}
