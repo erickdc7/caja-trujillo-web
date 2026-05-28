@@ -1,4 +1,353 @@
 ---
-// Footer — Pie de página con links, redes sociales y regulación
-// Contenido se implementará en el Paso 7
+/**
+ * Footer — pie de página institucional con columnas de links, brand y regulación.
+ * Responsive: 4 cols → 2 cols (1024px) → 1 col (768px).
+ */
 ---
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <!-- Grid principal -->
+    <div class="footer__grid">
+      <!-- Col 1 — Brand -->
+      <div class="footer__brand">
+        <a href="/" class="footer__logo" aria-label="Caja Trujillo — Inicio">
+          <div class="footer__mark">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <rect x="1" y="1" width="7.5" height="7.5" rx="1.5" fill="white"/>
+              <rect x="11.5" y="1" width="7.5" height="7.5" rx="1.5" fill="white"/>
+              <rect x="1" y="11.5" width="7.5" height="7.5" rx="1.5" fill="white"/>
+              <rect x="11.5" y="11.5" width="7.5" height="7.5" rx="1.5" fill="white"/>
+            </svg>
+          </div>
+          <div>
+            <span class="footer__name">Caja Trujillo</span>
+            <span class="footer__sub">Microfinanzas del Perú</span>
+          </div>
+        </a>
+        <p class="footer__desc">
+          Caja Municipal de Ahorro y Crédito de Trujillo S.A. — Impulsando emprendedores y familias peruanas desde 1982.
+        </p>
+
+        <!-- Redes sociales -->
+        <div class="footer__social">
+          <!-- Facebook -->
+          <a href="#" class="footer__social-btn" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" class="footer__social-btn" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="#" class="footer__social-btn" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="#" class="footer__social-btn" aria-label="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/>
+            </svg>
+          </a>
+          <!-- TikTok (Music2) -->
+          <a href="#" class="footer__social-btn" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="8" cy="18" r="4"/><path d="M12 18V2l7 4"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Col 2 — Para ti -->
+      <div class="footer__col">
+        <h4 class="footer__heading">Para ti</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="/para-ti/cuenta-simple">Cuenta Simple</a></li>
+          <li><a href="/para-ti/credijoya">Credijoya</a></li>
+          <li><a href="/para-ti/crece-mujer">Crece Mujer</a></li>
+          <li><a href="/para-ti/plazo-fijo">Plazo Fijo</a></li>
+          <li><a href="/para-ti/hipotecaja">Hipotecaja+</a></li>
+          <li><a href="/para-ti/seguros">Seguros</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3 — Para tu negocio -->
+      <div class="footer__col">
+        <h4 class="footer__heading">Para tu negocio</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="/para-tu-negocio/microemprendedor">Microemprendedor</a></li>
+          <li><a href="/para-tu-negocio/agricola-emprendedor">Agrícola Emprendedor</a></li>
+          <li><a href="/para-tu-negocio/facilito">Facilito</a></li>
+          <li><a href="/para-tu-negocio/mi-local-comercial">Mi Local Comercial</a></li>
+          <li><a href="/para-tu-negocio/">+Negocios</a></li>
+          <li><a href="/para-tu-negocio/empoderate-mujer">Empodérate Mujer</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4 — Canales -->
+      <div class="footer__col">
+        <h4 class="footer__heading">Canales</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="/canales-digitales/app-movil">App Caja Trujillo</a></li>
+          <li><a href="/canales-digitales/homebanking">Homebanking Personas</a></li>
+          <li><a href="/canales-digitales/homebanking">Homebanking Empresas</a></li>
+          <li><a href="/canales-digitales/">Cajeros ATM</a></li>
+          <li><a href="/canales-digitales/">Agentes Corresponsales</a></li>
+          <li><a href="/canales-digitales/">YAPE</a></li>
+          <li><a href="/simuladores">Simuladores</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Divisor -->
+    <hr class="footer__divider" />
+
+    <!-- Footer bottom -->
+    <div class="footer__bottom">
+      <span class="footer__copy">
+        &copy; 2026 Caja Municipal de Ahorro y Crédito de Trujillo S.A.
+      </span>
+
+      <div class="footer__legal">
+        <a href="#">Libro de reclamaciones</a>
+        <a href="#">Privacidad</a>
+        <a href="#">Términos</a>
+        <a href="#">Transparencia</a>
+      </div>
+
+      <div class="footer__sbs-badge">
+        <!-- Building icon -->
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>
+        </svg>
+        Supervisado por SBS
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* ===================================================
+     FOOTER BASE
+     =================================================== */
+  .footer {
+    background-color: var(--gray-950);
+    color: rgba(255, 255, 255, 0.55);
+    padding: 64px 0 32px;
+  }
+
+  /* ===================================================
+     GRID PRINCIPAL — 4 columnas
+     =================================================== */
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  /* ===================================================
+     BRAND (col 1)
+     =================================================== */
+  .footer__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 16px;
+  }
+
+  .footer__mark {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--red-500);
+    border-radius: 10px;
+  }
+
+  .footer__name {
+    display: block;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .footer__sub {
+    display: block;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .footer__desc {
+    font-size: 12.5px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 320px;
+  }
+
+  /* ===================================================
+     REDES SOCIALES
+     =================================================== */
+  .footer__social {
+    display: flex;
+    gap: 8px;
+  }
+
+  .footer__social-btn {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .footer__social-btn:hover {
+    background-color: var(--red-500);
+    border-color: var(--red-500);
+    color: var(--white);
+  }
+
+  .footer__social-btn:focus-visible {
+    outline: 2px solid var(--red-500);
+    outline-offset: 2px;
+  }
+
+  /* ===================================================
+     COLUMNAS DE LINKS
+     =================================================== */
+  .footer__heading {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+  }
+
+  .footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .footer__links a {
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.48);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer__links a:hover {
+    color: var(--yellow-400);
+  }
+
+  .footer__links a:focus-visible {
+    outline: 2px solid var(--red-500);
+    outline-offset: 2px;
+  }
+
+  /* ===================================================
+     DIVISOR
+     =================================================== */
+  .footer__divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    margin-bottom: 22px;
+  }
+
+  /* ===================================================
+     FOOTER BOTTOM
+     =================================================== */
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .footer__copy {
+    font-size: 11.5px;
+  }
+
+  .footer__legal {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .footer__legal a {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.38);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer__legal a:hover {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .footer__sbs-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 7px;
+    padding: 6px 12px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .footer__sbs-badge svg {
+    color: var(--yellow-400);
+  }
+
+  /* ===================================================
+     RESPONSIVE
+     =================================================== */
+  @media (max-width: 1024px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 48px 0 24px;
+    }
+
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+</style>

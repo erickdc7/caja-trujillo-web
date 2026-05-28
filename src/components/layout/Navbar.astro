@@ -1,4 +1,463 @@
 ---
-// Navbar — Navegación principal con mega-menús
-// Contenido se implementará en el Paso 7
+/**
+ * Navbar — barra de navegación principal sticky con mega-menús y acciones.
+ */
+import Button from '../ui/Button.astro';
+
+/* ── Datos de mega-menús ── */
+const megaMenus = [
+  {
+    label: 'Para ti',
+    href: '/para-ti/',
+    title: 'Créditos y ahorros para ti',
+    items: [
+      { name: 'Credijoya', desc: 'Préstamo con joyas', href: '/para-ti/credijoya', icon: 'Gem' },
+      { name: 'Crece Mujer', desc: 'Crédito para mujeres', href: '/para-ti/crece-mujer', icon: 'Heart' },
+      { name: 'Cuenta Simple', desc: 'Cuenta sin comisiones', href: '/para-ti/cuenta-simple', icon: 'CreditCard' },
+      { name: 'Hipotecaja+', desc: 'Crédito hipotecario', href: '/para-ti/hipotecaja', icon: 'Home' },
+      { name: 'Plazo Fijo', desc: 'Inversión segura', href: '/para-ti/plazo-fijo', icon: 'TrendingUp' },
+      { name: 'Seguros', desc: 'Vida, sepelio y oncológico', href: '/para-ti/seguros', icon: 'Shield' },
+    ],
+  },
+  {
+    label: 'Para tu negocio',
+    href: '/para-tu-negocio/',
+    title: 'Financiamiento para emprendedores',
+    items: [
+      { name: 'Microemprendedor', desc: 'Capital de trabajo', href: '/para-tu-negocio/microemprendedor', icon: 'Briefcase' },
+      { name: 'Mi Local Comercial', desc: 'Inversión en local', href: '/para-tu-negocio/mi-local-comercial', icon: 'Store' },
+      { name: 'Agrícola Emprendedor', desc: 'Crédito agrícola', href: '/para-tu-negocio/agricola-emprendedor', icon: 'Sprout' },
+      { name: 'Facilito', desc: 'Crédito rápido', href: '/para-tu-negocio/facilito', icon: 'Zap' },
+      { name: '+Negocios', desc: 'Línea revolvente', href: '/para-tu-negocio/', icon: 'BarChart2' },
+      { name: 'Empodérate Mujer', desc: 'Mujer empresaria', href: '/para-tu-negocio/empoderate-mujer', icon: 'Star' },
+    ],
+  },
+  {
+    label: 'Canales digitales',
+    href: '/canales-digitales/',
+    title: 'Opera desde donde estés',
+    items: [
+      { name: 'App Caja Trujillo', desc: 'Banca móvil', href: '/canales-digitales/app-movil', icon: 'Smartphone' },
+      { name: 'Homebanking Personas', desc: 'Banca en línea', href: '/canales-digitales/homebanking', icon: 'Monitor' },
+      { name: 'Homebanking Empresas', desc: 'Plataforma empresarial', href: '/canales-digitales/homebanking', icon: 'Building2' },
+      { name: 'Cajeros ATM', desc: 'Red de cajeros', href: '/canales-digitales/', icon: 'Landmark' },
+      { name: 'Agentes Corresponsales', desc: 'Puntos autorizados', href: '/canales-digitales/', icon: 'Users' },
+      { name: 'YAPE', desc: 'Pagos con YAPE', href: '/canales-digitales/', icon: 'Zap' },
+    ],
+  },
+];
+
+const simpleLinks = [
+  { label: 'Institucional', href: '/institucional/' },
+  { label: 'Simuladores', href: '/simuladores' },
+];
+
+/* ── Mapeo de iconos SVG ── */
+const iconSvg: Record<string, string> = {
+  Gem: '<path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/>',
+  Heart: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3.332.78-4.5 2-1.168-1.22-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+  CreditCard: '<rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>',
+  TrendingUp: '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+  Home: '<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  Shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  Briefcase: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
+  Store: '<path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/>',
+  Sprout: '<path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>',
+  Zap: '<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
+  Star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+  BarChart2: '<line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/>',
+  Smartphone: '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>',
+  Monitor: '<rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>',
+  Building2: '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/>',
+  Landmark: '<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+  Users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+};
 ---
+
+<header class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <!-- Logo -->
+    <a href="/" class="navbar__logo" aria-label="Caja Trujillo — Inicio">
+      <div class="navbar__mark">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <rect x="1" y="1" width="7.5" height="7.5" rx="1.5" fill="white"/>
+          <rect x="11.5" y="1" width="7.5" height="7.5" rx="1.5" fill="white"/>
+          <rect x="1" y="11.5" width="7.5" height="7.5" rx="1.5" fill="white"/>
+          <rect x="11.5" y="11.5" width="7.5" height="7.5" rx="1.5" fill="white"/>
+        </svg>
+      </div>
+      <div class="navbar__brand">
+        <span class="navbar__brand-name">Caja Trujillo</span>
+        <span class="navbar__brand-sub">Microfinanzas del Perú</span>
+      </div>
+    </a>
+
+    <!-- Navegación principal -->
+    <nav class="navbar__nav" aria-label="Navegación principal">
+      <ul class="navbar__list" role="list">
+        {/* Ítems con mega-menú */}
+        {megaMenus.map((menu) => (
+          <li class="navbar__item navbar__item--has-mega">
+            <a href={menu.href} class="navbar__link">
+              {menu.label}
+              {/* ChevronDown */}
+              <svg class="navbar__chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </a>
+
+            {/* Mega-menú */}
+            <div class="mega" role="menu" aria-label={menu.title}>
+              <span class="mega__title">{menu.title}</span>
+              <div class="mega__grid">
+                {menu.items.map((item) => (
+                  <a href={item.href} class="mega__item" role="menuitem">
+                    <div class="mega__icon">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={iconSvg[item.icon] || ''} />
+                    </div>
+                    <div>
+                      <span class="mega__name">{item.name}</span>
+                      <span class="mega__desc">{item.desc}</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </li>
+        ))}
+
+        {/* Ítems simples (sin mega-menú) */}
+        {simpleLinks.map((link) => (
+          <li class="navbar__item">
+            <a href={link.href} class="navbar__link">{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Acciones -->
+    <div class="navbar__actions">
+      <Button variant="outline" size="sm" href="/para-ti/cuenta-simple">Abrir cuenta</Button>
+      <Button variant="primary" size="sm" href="/simuladores" iconRight="ArrowRight">Solicitar crédito</Button>
+    </div>
+
+    <!-- Hamburguesa (mobile) -->
+    <button
+      class="navbar__burger"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      id="burger-btn"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  function initNavbar() {
+    const navbar = document.getElementById('navbar');
+    if (!navbar) return;
+
+    // Scroll — agregar clase scrolled
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // Hamburguesa — toggle mobile menu
+    const burger = document.getElementById('burger-btn');
+    if (burger) {
+      burger.addEventListener('click', () => {
+        const menu = document.getElementById('mobile-menu');
+        if (menu) {
+          menu.classList.toggle('open');
+          const isOpen = menu.classList.contains('open');
+          burger.setAttribute('aria-expanded', String(isOpen));
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        }
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initNavbar);
+  document.addEventListener('astro:after-swap', initNavbar);
+</script>
+
+<style>
+  /* ===================================================
+     NAVBAR BASE
+     =================================================== */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-xs);
+    height: 68px;
+  }
+
+  .navbar.scrolled {
+    box-shadow: var(--shadow-md);
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  /* ===================================================
+     LOGO
+     =================================================== */
+  .navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    text-decoration: none;
+    margin-right: 40px;
+    flex-shrink: 0;
+  }
+
+  .navbar__mark {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--red-500);
+    border-radius: 11px;
+    box-shadow: var(--shadow-red);
+  }
+
+  .navbar__brand {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar__brand-name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--gray-900);
+    line-height: 1.2;
+  }
+
+  .navbar__brand-sub {
+    font-size: 10px;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    line-height: 1.2;
+  }
+
+  /* ===================================================
+     NAV PRINCIPAL
+     =================================================== */
+  .navbar__nav {
+    flex: 1;
+  }
+
+  .navbar__list {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--gray-600);
+    border-radius: var(--r-sm);
+    transition: var(--transition);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .navbar__link:hover,
+  .navbar__link:focus-visible {
+    color: var(--red-500);
+    background-color: var(--red-50);
+  }
+
+  .navbar__chevron {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .navbar__item--has-mega:hover .navbar__chevron {
+    transform: rotate(180deg);
+  }
+
+  /* ===================================================
+     MEGA-MENÚ
+     =================================================== */
+  .navbar__item--has-mega {
+    position: relative;
+  }
+
+  .mega {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    min-width: 560px;
+    background-color: var(--white);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-200);
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 110;
+  }
+
+  .navbar__item--has-mega:hover .mega,
+  .navbar__item--has-mega:focus-within .mega {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .mega__title {
+    display: block;
+    font-size: 10.5px;
+    color: var(--red-500);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+
+  .mega__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .mega__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--r-md);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .mega__item:hover {
+    background-color: var(--red-50);
+  }
+
+  .mega__icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-100);
+    border-radius: 8px;
+    transition: var(--transition);
+  }
+
+  .mega__icon svg {
+    color: var(--gray-600);
+    transition: color 0.2s ease;
+  }
+
+  .mega__item:hover .mega__icon {
+    background-color: var(--red-100);
+  }
+
+  .mega__item:hover .mega__icon svg {
+    color: var(--red-500);
+  }
+
+  .mega__name {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-900);
+    line-height: 1.3;
+  }
+
+  .mega__desc {
+    display: block;
+    font-size: 11px;
+    color: var(--gray-500);
+    line-height: 1.4;
+  }
+
+  /* ===================================================
+     ACCIONES
+     =================================================== */
+  .navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+  }
+
+  /* ===================================================
+     HAMBURGUESA (mobile)
+     =================================================== */
+  .navbar__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .navbar__burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--gray-700);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  /* ===================================================
+     RESPONSIVE
+     =================================================== */
+  @media (max-width: 768px) {
+    .navbar__nav,
+    .navbar__actions {
+      display: none;
+    }
+
+    .navbar__burger {
+      display: flex;
+    }
+
+    .navbar__logo {
+      margin-right: 0;
+    }
+  }
+</style>

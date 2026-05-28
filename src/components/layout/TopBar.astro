@@ -1,4 +1,118 @@
 ---
-// TopBar — Barra superior con info institucional y accesos rápidos
-// Contenido se implementará en el Paso 7
+/**
+ * TopBar — barra superior con info institucional y acceso rápido a Homebanking.
+ * Visible solo en desktop (≥ 768px).
+ */
 ---
+
+<div class="topbar" aria-label="Barra de información">
+  <div class="container topbar__inner">
+    <!-- Lado izquierdo -->
+    <div class="topbar__left">
+      <span class="topbar__text">Trujillo, Perú · 20 regiones</span>
+      <a href="/para-ti/cuenta-simple" class="topbar__link">Consulta tu número de cuenta</a>
+      <a href="/institucional/" class="topbar__link">Central de atención</a>
+      <span class="topbar__sbs">
+        <!-- ShieldCheck icon -->
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        Regulado por SBS
+      </span>
+    </div>
+
+    <!-- Lado derecho -->
+    <div class="topbar__right">
+      <a href="#" class="topbar__link">ES · QCH</a>
+      <a href="/canales-digitales/homebanking" class="topbar__homebanking">
+        <!-- LayoutGrid icon -->
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>
+        </svg>
+        Homebanking
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .topbar {
+    background-color: var(--gray-950);
+    font-family: var(--font-body);
+    font-size: 12px;
+    padding: 7px 0;
+  }
+
+  .topbar__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .topbar__left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .topbar__text {
+    color: var(--gray-400);
+  }
+
+  .topbar__link {
+    color: var(--gray-400);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .topbar__link:hover {
+    color: var(--white);
+  }
+
+  .topbar__sbs {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background-color: rgba(255, 194, 0, 0.12);
+    border: 1px solid rgba(255, 194, 0, 0.28);
+    color: var(--yellow-400);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  .topbar__right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .topbar__homebanking {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--red-500);
+    color: var(--white);
+    padding: 4px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 12px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .topbar__homebanking:hover {
+    background-color: var(--red-400);
+  }
+
+  /* Ocultar en mobile */
+  @media (max-width: 768px) {
+    .topbar {
+      display: none;
+    }
+  }
+</style>
