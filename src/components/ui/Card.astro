@@ -1,4 +1,349 @@
 ---
-// Card — Tarjeta de producto con variante featured
-// Contenido se implementará en el Paso 5
+interface Product {
+  id: string;
+  slug: string;
+  icon: string;
+  badge: string;
+  badgeVariant: string;
+  name: string;
+  shortDesc: string;
+  feature: string;
+  cta: string;
+  ctaHref: string;
+  featured?: boolean;
+  [key: string]: unknown;
+}
+
+interface Props {
+  product: Product;
+  featured?: boolean;
+}
+
+const { product, featured = false } = Astro.props;
+
+/**
+ * Mapeo de nombres de icono Lucide a sus paths SVG.
+ * Solo incluimos los iconos usados en los JSONs de productos.
+ */
+const iconPaths: Record<string, string> = {
+  Gem: '<path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/>',
+  Heart: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3.332.78-4.5 2-1.168-1.22-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+  CreditCard: '<rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>',
+  TrendingUp: '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+  Home: '<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  Shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  Briefcase: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
+  Sprout: '<path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>',
+  Zap: '<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
+  Store: '<path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/>',
+  Star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+  BarChart2: '<line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/>',
+  HeartPulse: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3.332.78-4.5 2-1.168-1.22-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>',
+  Flower2: '<path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"/>',
+  Activity: '<path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/>',
+};
+
+const iconSvgContent = iconPaths[product.icon] || '';
+
+const badgeVariantMap: Record<string, string> = {
+  yellow: 'tag-yellow',
+  red: 'tag-red',
+};
+const badgeVariant = badgeVariantMap[product.badgeVariant] || 'tag-yellow';
 ---
+
+<a
+  href={product.ctaHref}
+  class:list={['card', { 'card--featured': featured }]}
+  aria-label={`${product.name} — ${product.shortDesc}`}
+>
+  <!-- Barra gradiente superior (solo en cards normales) -->
+  {!featured && <span class="card__bar" aria-hidden="true"></span>}
+
+  <!-- Icono del producto -->
+  <div class="card__icon-wrap">
+    <svg
+      class="card__icon"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      set:html={iconSvgContent}
+    />
+  </div>
+
+  <!-- Badge -->
+  {featured ? (
+    <span class="card__badge-featured">{product.badge}</span>
+  ) : (
+    <span class:list={['card__badge', `card__badge--${badgeVariant}`]}>
+      {product.badge}
+    </span>
+  )}
+
+  <!-- Nombre -->
+  <h3 class="card__name">{product.name}</h3>
+
+  <!-- Descripción -->
+  <p class="card__desc">{product.shortDesc}</p>
+
+  <!-- Feature highlight -->
+  <div class="card__feature">
+    <span class="card__feature-check" aria-hidden="true">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+    </span>
+    <span class="card__feature-text">{product.feature}</span>
+  </div>
+
+  <!-- Link CTA -->
+  <div class="card__link">
+    <span>{product.cta}</span>
+    <svg class="card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+    </svg>
+  </div>
+</a>
+
+<style>
+  /* ===================================================
+     CARD BASE
+     =================================================== */
+  .card {
+    position: relative;
+    display: block;
+    background-color: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--r-lg);
+    padding: 22px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.25s ease;
+  }
+
+  .card:focus-visible {
+    outline: 2px solid var(--red-500);
+    outline-offset: 2px;
+  }
+
+  /* Barra gradiente superior */
+  .card__bar {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--red-500), var(--yellow-500));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    border-color: var(--red-200);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+
+  .card:hover .card__bar {
+    transform: scaleX(1);
+  }
+
+  /* ===================================================
+     ICONO
+     =================================================== */
+  .card__icon-wrap {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background-color: var(--gray-100);
+    margin-bottom: 14px;
+    transition: all 0.25s ease;
+  }
+
+  .card__icon {
+    color: var(--gray-600);
+    transition: color 0.25s ease;
+  }
+
+  .card:hover .card__icon-wrap {
+    background-color: var(--red-100);
+  }
+
+  .card:hover .card__icon {
+    color: var(--red-500);
+  }
+
+  /* ===================================================
+     BADGE (normal card)
+     =================================================== */
+  .card__badge {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+
+  .card__badge--tag-yellow {
+    color: #926900;
+    background-color: var(--yellow-100);
+    border: 1px solid var(--yellow-200);
+  }
+
+  .card__badge--tag-red {
+    color: var(--red-600);
+    background-color: var(--red-50);
+    border: 1px solid var(--red-200);
+  }
+
+  /* ===================================================
+     NOMBRE Y DESCRIPCIÓN
+     =================================================== */
+  .card__name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 15.5px;
+    color: var(--gray-900);
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+
+  .card__desc {
+    font-size: 12.5px;
+    color: var(--gray-600);
+    line-height: 1.55;
+    margin: 0 0 14px;
+  }
+
+  /* ===================================================
+     FEATURE HIGHLIGHT
+     =================================================== */
+  .card__feature {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 16px;
+  }
+
+  .card__feature-check {
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--red-100);
+    flex-shrink: 0;
+  }
+
+  .card__feature-check svg {
+    color: var(--red-500);
+  }
+
+  .card__feature-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-700);
+  }
+
+  /* ===================================================
+     LINK CTA
+     =================================================== */
+  .card__link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--red-500);
+  }
+
+  .card__arrow {
+    transition: transform 0.25s ease;
+  }
+
+  .card:hover .card__arrow {
+    transform: translateX(4px);
+  }
+
+  /* ===================================================
+     CARD FEATURED
+     =================================================== */
+  .card--featured {
+    background-color: var(--red-500);
+    border-color: var(--red-400);
+  }
+
+  .card--featured:hover {
+    border-color: var(--red-400);
+    box-shadow: var(--shadow-red-lg);
+  }
+
+  .card--featured .card__icon-wrap {
+    background-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .card--featured .card__icon {
+    color: var(--white);
+  }
+
+  .card--featured:hover .card__icon-wrap {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .card--featured:hover .card__icon {
+    color: var(--white);
+  }
+
+  .card--featured .card__badge-featured {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: rgba(255, 194, 0, 0.22);
+    color: var(--yellow-400);
+    border: 1px solid rgba(255, 194, 0, 0.35);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+
+  .card--featured .card__name {
+    color: var(--white);
+  }
+
+  .card--featured .card__desc {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .card--featured .card__feature-check {
+    background-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .card--featured .card__feature-check svg {
+    color: var(--white);
+  }
+
+  .card--featured .card__feature-text {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .card--featured .card__link {
+    color: var(--white);
+  }
+</style>

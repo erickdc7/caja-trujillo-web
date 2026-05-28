@@ -1,4 +1,81 @@
 ---
-// Badge — Componente de etiqueta con variantes (eyebrow|tag-yellow|tag-red|category)
-// Contenido se implementará en el Paso 5
+interface Props {
+  variant?: 'eyebrow' | 'tag-yellow' | 'tag-red' | 'category';
+  text: string;
+  class?: string;
+}
+
+const {
+  variant = 'eyebrow',
+  text,
+  class: className = '',
+} = Astro.props;
 ---
+
+<span class:list={['badge', `badge--${variant}`, className]}>
+  {text}
+</span>
+
+<style>
+  .badge {
+    display: inline-block;
+    line-height: 1;
+  }
+
+  /* ===================================================
+     EYEBROW — pill redondeado para encabezados de sección
+     =================================================== */
+  .badge--eyebrow {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--red-500);
+    background-color: var(--red-50);
+    border: 1px solid var(--red-200);
+    border-radius: 20px;
+    padding: 4px 12px;
+  }
+
+  /* ===================================================
+     TAG YELLOW — etiqueta destacada amarilla
+     =================================================== */
+  .badge--tag-yellow {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #926900;
+    background-color: var(--yellow-100);
+    border: 1px solid var(--yellow-200);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+
+  /* ===================================================
+     TAG RED — etiqueta roja
+     =================================================== */
+  .badge--tag-red {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--red-600);
+    background-color: var(--red-50);
+    border: 1px solid var(--red-200);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+
+  /* ===================================================
+     CATEGORY — badge sobre thumbnails de noticias
+     =================================================== */
+  .badge--category {
+    background-color: var(--red-500);
+    color: var(--white);
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+</style>

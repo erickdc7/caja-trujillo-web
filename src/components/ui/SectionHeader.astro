@@ -1,4 +1,82 @@
 ---
-// SectionHeader — Encabezado de sección con eyebrow, título y subtítulo
-// Contenido se implementará en el Paso 5
+import Badge from './Badge.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  accentWord?: string;
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  align = 'left',
+  accentWord,
+  class: className = '',
+} = Astro.props;
+
+/**
+ * Si se define accentWord, envolvemos esa palabra en un <span> con color rojo.
+ * Se usa una función para generar el HTML del título de forma segura.
+ */
+function buildTitle(raw: string, accent?: string): string {
+  if (!accent) return raw;
+  return raw.replace(
+    accent,
+    `<span class="section-header__accent">${accent}</span>`,
+  );
+}
+
+const titleHtml = buildTitle(title, accentWord);
 ---
+
+<div class:list={['section-header', { 'section-header--center': align === 'center' }, className]}>
+  {eyebrow && <Badge variant="eyebrow" text={eyebrow} />}
+  <h2 class="section-header__title" set:html={titleHtml} />
+  {subtitle && <p class="section-header__subtitle">{subtitle}</p>}
+</div>
+
+<style>
+  .section-header {
+    margin-bottom: 8px;
+  }
+
+  .section-header--center {
+    text-align: center;
+  }
+
+  .section-header__title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--gray-900);
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
+
+  .section-header__subtitle {
+    font-size: 15.5px;
+    color: var(--gray-600);
+    max-width: 520px;
+    line-height: 1.6;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+
+  .section-header--center .section-header__subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<style is:global>
+  .section-header__accent {
+    color: var(--red-500);
+  }
+</style>
