@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "id": 1,
+    "slug": "caja-trujillo-500-mil-clientes",
+    "category": "Institucional",
+    "categoryIcon": "Building2",
+    "date": "2026-05-20",
+    "dateFormatted": "20 de mayo, 2026",
+    "title": "Caja Trujillo alcanza los 500,000 clientes activos y reafirma su liderazgo en el norte del Perú",
+    "excerpt": "La entidad microfinanciera celebra un hito histórico consolidándose como la principal caja municipal del norte del país con presencia en 20 regiones.",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "slug": "nueva-app-caja-trujillo-2026",
+    "category": "Digital",
+    "categoryIcon": "Smartphone",
+    "date": "2026-05-15",
+    "dateFormatted": "15 de mayo, 2026",
+    "title": "Nueva versión de la App Caja Trujillo disponible en iOS y Android con biometría mejorada",
+    "excerpt": "La actualización incluye autenticación biométrica avanzada y el nuevo módulo de pago de servicios integrado.",
+    "featured": false
+  },
+  {
+    "id": 3,
+    "slug": "credito-agricola-sierra-norte-2026",
+    "category": "Agro",
+    "categoryIcon": "Sprout",
+    "date": "2026-05-10",
+    "dateFormatted": "10 de mayo, 2026",
+    "title": "Campaña especial de crédito agrícola para la sierra norte con tasas preferenciales",
+    "excerpt": "El programa incluye tasas preferenciales y cronogramas de pago adaptados a los ciclos de cosecha de la región norte.",
+    "featured": false
+  }
+]

@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "icon": "CreditCard",
+    "label": "Pagar cuota",
+    "href": "/canales-digitales/homebanking"
+  },
+  {
+    "icon": "Calculator",
+    "label": "Simular crédito",
+    "href": "/simuladores"
+  },
+  {
+    "icon": "UserPlus",
+    "label": "Abrir cuenta",
+    "href": "/para-ti/cuenta-simple"
+  },
+  {
+    "icon": "ArrowRight",
+    "label": "Transferir",
+    "href": "/canales-digitales/homebanking"
+  },
+  {
+    "icon": "DollarSign",
+    "label": "Tipo de cambio",
+    "href": "/simuladores"
+  },
+  {
+    "icon": "Landmark",
+    "label": "Cajeros ATM",
+    "href": "/canales-digitales/"
+  },
+  {
+    "icon": "MapPin",
+    "label": "Agencias",
+    "href": "/institucional/"
+  },
+  {
+    "icon": "Phone",
+    "label": "Contáctanos",
+    "href": "/institucional/"
+  }
+]

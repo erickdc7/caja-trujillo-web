@@ -1,1 +1,113 @@
-[]
+[
+  {
+    "id": "seguro-vida",
+    "slug": "seguro-vida",
+    "icon": "HeartPulse",
+    "badge": "Protección",
+    "badgeVariant": "red",
+    "name": "Seguro de Vida",
+    "shortDesc": "Protege el futuro de tu familia con una cobertura de vida desde S/ 18 al mes.",
+    "feature": "Desde S/ 18 al mes",
+    "cta": "Ver coberturas",
+    "ctaHref": "/para-ti/seguros",
+    "featured": false,
+    "benefits": [
+      {
+        "icon": "Shield",
+        "title": "Cobertura completa",
+        "desc": "Protección ante fallecimiento natural o accidental"
+      },
+      {
+        "icon": "Users",
+        "title": "Familia protegida",
+        "desc": "Designa a tus beneficiarios libremente"
+      },
+      {
+        "icon": "DollarSign",
+        "title": "Cuotas accesibles",
+        "desc": "Planes desde S/ 18 mensuales"
+      },
+      {
+        "icon": "FileText",
+        "title": "Trámite sencillo",
+        "desc": "Sin exámenes médicos hasta cierta edad"
+      }
+    ],
+    "metaTitle": "Seguro de Vida | Caja Trujillo",
+    "metaDesc": "Seguro de vida en Caja Trujillo. Protege a tu familia desde S/ 18 al mes."
+  },
+  {
+    "id": "seguro-sepelio",
+    "slug": "seguro-sepelio",
+    "icon": "Flower2",
+    "badge": "Sepelio",
+    "badgeVariant": "red",
+    "name": "Seguro de Sepelio",
+    "shortDesc": "Cobertura integral de gastos de sepelio para ti y toda tu familia. Tranquilidad garantizada.",
+    "feature": "Cobertura familiar incluida",
+    "cta": "Conocer más",
+    "ctaHref": "/para-ti/seguros",
+    "featured": false,
+    "benefits": [
+      {
+        "icon": "Users",
+        "title": "Cobertura familiar",
+        "desc": "Incluye al titular, cónyuge e hijos"
+      },
+      {
+        "icon": "Clock",
+        "title": "Atención inmediata",
+        "desc": "Servicio de asistencia las 24 horas"
+      },
+      {
+        "icon": "MapPin",
+        "title": "Cobertura nacional",
+        "desc": "Válido en todo el territorio peruano"
+      },
+      {
+        "icon": "DollarSign",
+        "title": "Prima accesible",
+        "desc": "Planes ajustados a tu presupuesto"
+      }
+    ],
+    "metaTitle": "Seguro de Sepelio | Caja Trujillo",
+    "metaDesc": "Seguro de sepelio familiar en Caja Trujillo. Cobertura integral para ti y tu familia."
+  },
+  {
+    "id": "seguro-oncologico",
+    "slug": "seguro-oncologico",
+    "icon": "Activity",
+    "badge": "Oncológico",
+    "badgeVariant": "red",
+    "name": "Seguro Oncológico",
+    "shortDesc": "Cobertura especializada ante diagnóstico de cáncer. Tratamiento sin preocupaciones económicas.",
+    "feature": "Cobertura hasta S/ 150,000",
+    "cta": "Ver beneficios",
+    "ctaHref": "/para-ti/seguros",
+    "featured": false,
+    "benefits": [
+      {
+        "icon": "HeartPulse",
+        "title": "Tratamiento completo",
+        "desc": "Cubre quimioterapia, radioterapia y cirugías"
+      },
+      {
+        "icon": "Building2",
+        "title": "Red de clínicas",
+        "desc": "Acceso a las mejores clínicas del país"
+      },
+      {
+        "icon": "DollarSign",
+        "title": "Alto respaldo",
+        "desc": "Cobertura hasta S/ 150,000 en tratamiento"
+      },
+      {
+        "icon": "Shield",
+        "title": "Sin carencia",
+        "desc": "Cobertura desde el primer día de diagnóstico"
+      }
+    ],
+    "metaTitle": "Seguro Oncológico | Caja Trujillo",
+    "metaDesc": "Seguro oncológico en Caja Trujillo. Cobertura especializada hasta S/ 150,000 para tratamiento de cáncer."
+  }
+]

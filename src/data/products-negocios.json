@@ -1,1 +1,141 @@
-[]
+[
+  {
+    "id": "microemprendedor",
+    "slug": "microemprendedor",
+    "icon": "Briefcase",
+    "badge": "Más solicitado",
+    "badgeVariant": "yellow",
+    "name": "Microemprendedor",
+    "shortDesc": "Capital de trabajo para hacer crecer tu negocio desde S/500, con evaluación en 24 horas.",
+    "feature": "Respuesta en 24 horas",
+    "cta": "Solicitar ahora",
+    "ctaHref": "/para-tu-negocio/microemprendedor",
+    "featured": true,
+    "minAmount": 500,
+    "maxAmount": 100000,
+    "maxMonths": 48,
+    "tea": 28.5,
+    "benefits": [
+      {
+        "icon": "Clock",
+        "title": "Respuesta en 24h",
+        "desc": "Evaluación y aprobación en un día hábil"
+      },
+      {
+        "icon": "FileText",
+        "title": "Mínimo papeleo",
+        "desc": "Proceso simplificado sin trámites engorrosos"
+      },
+      {
+        "icon": "TrendingUp",
+        "title": "Montos flexibles",
+        "desc": "Desde S/ 500 hasta S/ 100,000 según tu capacidad"
+      },
+      {
+        "icon": "Users",
+        "title": "Asesor dedicado",
+        "desc": "Un ejecutivo te acompaña durante todo el proceso"
+      }
+    ],
+    "requirements": [
+      "DNI vigente",
+      "Actividad económica mínima 6 meses",
+      "No requiere aval en montos menores a S/10,000",
+      "Recibo de servicios del negocio"
+    ],
+    "steps": [
+      {
+        "icon": "FileText",
+        "title": "Solicita en línea o en agencia",
+        "desc": "Completa tu solicitud con tus datos básicos"
+      },
+      {
+        "icon": "Search",
+        "title": "Evaluación rápida",
+        "desc": "Revisamos tu perfil y capacidad de pago en 24 horas"
+      },
+      {
+        "icon": "Banknote",
+        "title": "Desembolso",
+        "desc": "Recibes el dinero en tu cuenta o en efectivo"
+      }
+    ],
+    "metaTitle": "Crédito Microemprendedor | Caja Trujillo",
+    "metaDesc": "Crédito para emprendedores desde S/500 en Caja Trujillo. Evaluación en 24 horas, mínimo papeleo."
+  },
+  {
+    "id": "agricola-emprendedor",
+    "slug": "agricola-emprendedor",
+    "icon": "Sprout",
+    "badge": "Sector agrícola",
+    "badgeVariant": "red",
+    "name": "Agrícola Emprendedor",
+    "shortDesc": "Financia tu campaña agrícola con cronograma adaptado a tus ciclos de cosecha y producción.",
+    "feature": "Cronograma adaptado al campo",
+    "cta": "Ver condiciones",
+    "ctaHref": "/para-tu-negocio/agricola-emprendedor",
+    "featured": false,
+    "metaTitle": "Crédito Agrícola Emprendedor | Caja Trujillo",
+    "metaDesc": "Financia tu campaña agrícola en Caja Trujillo. Cronograma adaptado a tus ciclos de cosecha."
+  },
+  {
+    "id": "facilito",
+    "slug": "facilito",
+    "icon": "Zap",
+    "badge": "Ágil",
+    "badgeVariant": "yellow",
+    "name": "Facilito",
+    "shortDesc": "El crédito más rápido para pequeños comerciantes. Sin papeleo, desembolso el mismo día.",
+    "feature": "Desembolso el mismo día",
+    "cta": "Solicitar Facilito",
+    "ctaHref": "/para-tu-negocio/facilito",
+    "featured": false,
+    "metaTitle": "Facilito — Crédito rápido para comerciantes | Caja Trujillo",
+    "metaDesc": "El crédito más ágil de Caja Trujillo. Sin papeleo, desembolso el mismo día para pequeños negocios."
+  },
+  {
+    "id": "mi-local-comercial",
+    "slug": "mi-local-comercial",
+    "icon": "Store",
+    "badge": "Local comercial",
+    "badgeVariant": "red",
+    "name": "Mi Local Comercial",
+    "shortDesc": "Invierte en infraestructura para tu negocio: refacción, ampliación o compra de local.",
+    "feature": "Hasta S/ 500,000",
+    "cta": "Conocer más",
+    "ctaHref": "/para-tu-negocio/mi-local-comercial",
+    "featured": false,
+    "metaTitle": "Mi Local Comercial — Inversión para tu negocio | Caja Trujillo",
+    "metaDesc": "Financia la compra o mejora de tu local comercial en Caja Trujillo. Hasta S/ 500,000."
+  },
+  {
+    "id": "empoderate-mujer",
+    "slug": "empoderate-mujer",
+    "icon": "Star",
+    "badge": "Mujer empresaria",
+    "badgeVariant": "red",
+    "name": "Empodérate Mujer",
+    "shortDesc": "Crédito especial con asesoría empresarial incluida para mujeres que lideran su negocio.",
+    "feature": "Asesoría empresarial incluida",
+    "cta": "Más información",
+    "ctaHref": "/para-tu-negocio/empoderate-mujer",
+    "featured": false,
+    "metaTitle": "Empodérate Mujer — Crédito para mujeres empresarias | Caja Trujillo",
+    "metaDesc": "Programa de crédito y asesoría para mujeres empresarias en Caja Trujillo."
+  },
+  {
+    "id": "mas-negocios",
+    "slug": "mas-negocios",
+    "icon": "BarChart2",
+    "badge": "MYPE",
+    "badgeVariant": "yellow",
+    "name": "+Negocios",
+    "shortDesc": "Línea de crédito revolvente para empresas con necesidades permanentes de financiamiento.",
+    "feature": "Línea revolvente flexible",
+    "cta": "Calcular línea",
+    "ctaHref": "/para-tu-negocio/",
+    "featured": false,
+    "metaTitle": "+Negocios — Línea revolvente MYPE | Caja Trujillo",
+    "metaDesc": "Línea de crédito revolvente para MYPE en Caja Trujillo. Financiamiento continuo y flexible."
+  }
+]

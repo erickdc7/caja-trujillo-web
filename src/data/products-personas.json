@@ -1,1 +1,201 @@
-[]
+[
+  {
+    "id": "credijoya",
+    "slug": "credijoya",
+    "icon": "Gem",
+    "badge": "Destacado",
+    "badgeVariant": "yellow",
+    "name": "Credijoya",
+    "shortDesc": "Obtén liquidez inmediata dejando tus joyas como garantía. Proceso en minutos, sin burocracia.",
+    "feature": "Aprobación el mismo día",
+    "cta": "Solicitar ahora",
+    "ctaHref": "/para-ti/credijoya",
+    "featured": true,
+    "minAmount": 200,
+    "maxAmount": 50000,
+    "maxMonths": 12,
+    "tea": 48.5,
+    "benefits": [
+      {
+        "icon": "Zap",
+        "title": "Aprobación inmediata",
+        "desc": "Evaluación y desembolso el mismo día de tu solicitud"
+      },
+      {
+        "icon": "Shield",
+        "title": "Joyas protegidas",
+        "desc": "Tus prendas están aseguradas durante todo el plazo del crédito"
+      },
+      {
+        "icon": "RefreshCw",
+        "title": "Renovación fácil",
+        "desc": "Renueva sin necesidad de retirar tus joyas"
+      },
+      {
+        "icon": "TrendingDown",
+        "title": "Tasa competitiva",
+        "desc": "Una de las tasas más bajas del mercado microfinanciero"
+      }
+    ],
+    "requirements": [
+      "DNI vigente",
+      "Joyas de oro, plata o platino",
+      "No requiere historial crediticio",
+      "No requiere aval"
+    ],
+    "steps": [
+      {
+        "icon": "Gem",
+        "title": "Presenta tus joyas",
+        "desc": "Lleva tus joyas a cualquier agencia Caja Trujillo"
+      },
+      {
+        "icon": "Search",
+        "title": "Evaluación inmediata",
+        "desc": "Nuestro tasador evalúa tus prendas al instante"
+      },
+      {
+        "icon": "Banknote",
+        "title": "Recibe tu dinero",
+        "desc": "Desembolso inmediato en efectivo o a tu cuenta"
+      }
+    ],
+    "metaTitle": "Credijoya — Préstamo con garantía de joyas | Caja Trujillo",
+    "metaDesc": "Obtén crédito inmediato con tus joyas en Caja Trujillo. Sin historial crediticio, aprobación el mismo día."
+  },
+  {
+    "id": "crece-mujer",
+    "slug": "crece-mujer",
+    "icon": "Heart",
+    "badge": "Crédito especial",
+    "badgeVariant": "red",
+    "name": "Crece Mujer",
+    "shortDesc": "Línea de crédito con tasa preferencial diseñada para mujeres emprendedoras del Perú.",
+    "feature": "Tasa preferencial exclusiva",
+    "cta": "Conocer más",
+    "ctaHref": "/para-ti/crece-mujer",
+    "featured": false,
+    "minAmount": 500,
+    "maxAmount": 30000,
+    "maxMonths": 36,
+    "tea": 32.0,
+    "benefits": [
+      {
+        "icon": "Percent",
+        "title": "Tasa diferenciada",
+        "desc": "Condiciones preferenciales exclusivas para titulares mujeres"
+      },
+      {
+        "icon": "Users",
+        "title": "Asesoría incluida",
+        "desc": "Acompañamiento financiero durante todo el crédito"
+      },
+      {
+        "icon": "Clock",
+        "title": "Trámite ágil",
+        "desc": "Proceso simplificado y rápido de evaluación"
+      },
+      {
+        "icon": "Award",
+        "title": "Capacitación",
+        "desc": "Acceso a talleres de educación financiera y empresarial"
+      }
+    ],
+    "requirements": [
+      "DNI vigente",
+      "Ser mujer mayor de 18 años",
+      "Tener actividad económica o negocio",
+      "Sin aval hasta S/ 5,000"
+    ],
+    "metaTitle": "Crece Mujer — Crédito para mujeres emprendedoras | Caja Trujillo",
+    "metaDesc": "Crédito especial con tasa preferencial para mujeres emprendedoras en Caja Trujillo."
+  },
+  {
+    "id": "cuenta-simple",
+    "slug": "cuenta-simple",
+    "icon": "CreditCard",
+    "badge": "Cuenta de ahorros",
+    "badgeVariant": "yellow",
+    "name": "Cuenta Simple",
+    "shortDesc": "Abre tu cuenta sin comisiones, sin monto mínimo y con tarjeta Visa incluida desde el día uno.",
+    "feature": "Sin costo de mantenimiento",
+    "cta": "Abrir cuenta",
+    "ctaHref": "/para-ti/cuenta-simple",
+    "featured": false,
+    "benefits": [
+      {
+        "icon": "CircleDollarSign",
+        "title": "Sin costo mensual",
+        "desc": "Cero cobros por mantener tu cuenta activa"
+      },
+      {
+        "icon": "CreditCard",
+        "title": "Tarjeta Visa incluida",
+        "desc": "Débito Visa para compras en tiendas y online"
+      },
+      {
+        "icon": "Smartphone",
+        "title": "Banca digital gratis",
+        "desc": "App y homebanking sin costo adicional"
+      },
+      {
+        "icon": "Globe",
+        "title": "Uso internacional",
+        "desc": "Cajeros y comercios en todo el mundo"
+      }
+    ],
+    "requirements": [
+      "DNI vigente",
+      "Apertura desde S/ 1",
+      "Mayor de 18 años",
+      "Sin historial crediticio requerido"
+    ],
+    "metaTitle": "Cuenta Simple — Cuenta de ahorros sin comisiones | Caja Trujillo",
+    "metaDesc": "Abre tu cuenta de ahorros gratis en Caja Trujillo. Sin mantenimiento, sin saldo mínimo, con tarjeta Visa."
+  },
+  {
+    "id": "plazo-fijo",
+    "slug": "plazo-fijo",
+    "icon": "TrendingUp",
+    "badge": "Inversión",
+    "badgeVariant": "yellow",
+    "name": "Depósito a Plazo Fijo",
+    "shortDesc": "Maximiza el rendimiento de tu dinero con tasas hasta 8% TEA. Plazos desde 30 días.",
+    "feature": "Hasta 8% TEA garantizado",
+    "cta": "Ver tasas",
+    "ctaHref": "/para-ti/plazo-fijo",
+    "featured": false,
+    "metaTitle": "Depósito a Plazo Fijo | Caja Trujillo",
+    "metaDesc": "Invierte con seguridad en Caja Trujillo. Tasas hasta 8% TEA, plazos desde 30 días."
+  },
+  {
+    "id": "hipotecaja",
+    "slug": "hipotecaja",
+    "icon": "Home",
+    "badge": "Hipotecario",
+    "badgeVariant": "red",
+    "name": "Hipotecaja+",
+    "shortDesc": "Financia la compra, construcción o mejora de tu vivienda con condiciones flexibles.",
+    "feature": "Hasta 20 años de plazo",
+    "cta": "Simular crédito",
+    "ctaHref": "/para-ti/hipotecaja",
+    "featured": false,
+    "metaTitle": "Hipotecaja+ — Crédito hipotecario | Caja Trujillo",
+    "metaDesc": "Financia tu vivienda en Caja Trujillo. Compra, construcción o mejora con plazo hasta 20 años."
+  },
+  {
+    "id": "seguros",
+    "slug": "seguros",
+    "icon": "Shield",
+    "badge": "Protección",
+    "badgeVariant": "red",
+    "name": "Seguros",
+    "shortDesc": "Vida, sepelio y oncológico. Protege a tu familia ante cualquier imprevisto desde S/ 18/mes.",
+    "feature": "Desde S/ 18 al mes",
+    "cta": "Ver coberturas",
+    "ctaHref": "/para-ti/seguros",
+    "featured": false,
+    "metaTitle": "Seguros de vida, sepelio y oncológico | Caja Trujillo",
+    "metaDesc": "Seguros de vida, sepelio y oncológico en Caja Trujillo. Cobertura familiar desde S/ 18 al mes."
+  }
+]
