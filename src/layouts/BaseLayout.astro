@@ -1,4 +1,99 @@
 ---
-// BaseLayout — Layout base HTML con head, meta tags, fuentes y scripts globales
-// Contenido se implementará en el Paso 6
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/og-default.png',
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Caja Trujillo" />
+    <meta property="og:locale" content="es_PE" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts — preconnect para rendimiento -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos globales -->
+    <style>
+      @import '../styles/tokens.css';
+      @import '../styles/global.css';
+      @import '../styles/animations.css';
+    </style>
+  </head>
+  <body>
+    <!-- Skip to main — accesibilidad teclado -->
+    <a href="#main-content" class="skip-to-main">
+      Saltar al contenido principal
+    </a>
+
+    <slot />
+
+    <!-- Intersection Observer global — animaciones de revelación -->
+    <script>
+      function initScrollReveal() {
+        const elements = document.querySelectorAll('.fade-up, .fade-in');
+        if (!elements.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target as HTMLElement;
+                const index = Array.from(elements).indexOf(el);
+                const delay = index * 80;
+                setTimeout(() => {
+                  el.classList.add('visible');
+                }, delay);
+                observer.unobserve(el);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+
+        elements.forEach((el) => observer.observe(el));
+      }
+
+      document.addEventListener('DOMContentLoaded', initScrollReveal);
+      document.addEventListener('astro:after-swap', initScrollReveal);
+    </script>
+  </body>
+</html>

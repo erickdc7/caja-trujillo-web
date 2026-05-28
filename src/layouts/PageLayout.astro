@@ -1,4 +1,27 @@
 ---
-// PageLayout — Extiende BaseLayout, incluye TopBar + Navbar + Footer
-// Contenido se implementará en el Paso 6
+import BaseLayout from './BaseLayout.astro';
+import TopBar from '../components/layout/TopBar.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import MobileMenu from '../components/layout/MobileMenu.astro';
+import Footer from '../components/layout/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
 ---
+
+<BaseLayout title={title} description={description} ogImage={ogImage}>
+  <TopBar />
+  <Navbar />
+  <MobileMenu />
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <Footer />
+</BaseLayout>
