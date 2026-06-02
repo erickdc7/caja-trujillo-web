@@ -1,4 +1,8 @@
 ---
-// Homebanking — Banca en línea
-// Contenido se implementará en el Paso 10
+import PageLayout from '../../layouts/PageLayout.astro';import BreadCrumb from '../../components/shared/BreadCrumb.astro';import Button from '../../components/ui/Button.astro';import CTABand from '../../components/shared/CTABand.astro';
 ---
+<PageLayout title="Homebanking — Banca en línea | Caja Trujillo" description="Accede a tu banca en línea para personas y empresas. Transferencias, pagos y consultas.">
+  <section class="page-hero"><div class="container"><BreadCrumb items={[{label:'Inicio',href:'/'},{label:'Canales digitales',href:'/canales-digitales/'},{label:'Homebanking'}]} /><h1 class="page-hero__title">Banca en línea para ti y tu empresa</h1><p class="page-hero__sub">Gestiona tus finanzas personales o empresariales desde cualquier navegador web, sin instalar nada.</p><div class="page-hero__btns"><Button variant="primary" size="lg" href="#">Ingresar Personas</Button><Button variant="dark" size="lg" href="#">Ingresar Empresas</Button></div></div></section>
+  <CTABand />
+</PageLayout>
+<style>.page-hero{background-color:var(--gray-950);padding:60px 0 72px}.page-hero__title{font-family:var(--font-head);font-weight:800;color:var(--white);font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-0.04em;margin:12px 0;line-height:1.15}.page-hero__sub{font-size:15px;color:rgba(255,255,255,0.62);margin:0 0 24px;max-width:520px}.page-hero__btns{display:flex;gap:12px;flex-wrap:wrap}</style>

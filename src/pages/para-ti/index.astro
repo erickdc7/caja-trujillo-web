@@ -1,4 +1,81 @@
 ---
-// Para ti — Hub de productos para personas
-// Contenido se implementará en el Paso 10 (Página 2)
+import PageLayout from '../../layouts/PageLayout.astro';
+import BreadCrumb from '../../components/shared/BreadCrumb.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import Card from '../../components/ui/Card.astro';
+import CTABand from '../../components/shared/CTABand.astro';
+import products from '../../data/products-personas.json';
 ---
+
+<PageLayout title="Para ti — Créditos y ahorros personales | Caja Trujillo" description="Créditos, cuentas de ahorro y seguros diseñados para personas. Credijoya, Crece Mujer, Cuenta Simple, Plazo Fijo y más.">
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <BreadCrumb items={[{ label: 'Inicio', href: '/' }, { label: 'Para ti' }]} />
+      <Badge variant="eyebrow" text="Para personas" />
+      <h1 class="page-hero__title">Productos diseñados para ti y tu familia</h1>
+      <p class="page-hero__sub">Créditos, ahorros y seguros con las mejores condiciones del mercado microfinanciero.</p>
+      <div class="page-hero__btns">
+        <Button variant="primary" size="lg" href="/simuladores" iconRight="ArrowRight">Solicitar crédito</Button>
+        <Button variant="ghost" size="lg" href="/simuladores">Ver simuladores</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtros -->
+  <section class="filters"><div class="container"><div class="filter-tabs" role="tablist"><button class="filter-tab filter-tab--active" role="tab" aria-selected="true">Todos</button><button class="filter-tab" role="tab" aria-selected="false">Créditos</button><button class="filter-tab" role="tab" aria-selected="false">Ahorros</button><button class="filter-tab" role="tab" aria-selected="false">Seguros</button></div></div></section>
+
+  <!-- Grid de productos -->
+  <section class="products-sec"><div class="container"><div class="products-grid">{products.map((p: any) => <Card product={p} featured={p.featured} />)}</div></div></section>
+
+  <!-- Comparador -->
+  <section class="comparator-sec">
+    <div class="container">
+      <SectionHeader eyebrow="Elige el tuyo" title="¿No sabes cuál elegir?" align="center" />
+      <div class="table-wrap">
+        <table class="comp-table">
+          <thead><tr><th></th><th>Credijoya</th><th>Crece Mujer</th><th>Cuenta Simple</th></tr></thead>
+          <tbody>
+            <tr><td>Monto máximo</td><td>S/ 50,000</td><td>S/ 30,000</td><td>Sin límite</td></tr>
+            <tr><td>Plazo</td><td>12 meses</td><td>36 meses</td><td>—</td></tr>
+            <tr><td>Garantía requerida</td><td>Joyas</td><td>No</td><td>No</td></tr>
+            <tr><td>Tiempo de aprobación</td><td>Mismo día</td><td>24 horas</td><td>Inmediato</td></tr>
+            <tr><td>TEA referencial</td><td>48.5%</td><td>32%</td><td>—</td></tr>
+            <tr class="comp-table__cta-row"><td></td><td><a href="/para-ti/credijoya" class="comp-btn">Solicitar</a></td><td><a href="/para-ti/crece-mujer" class="comp-btn">Solicitar</a></td><td><a href="/para-ti/cuenta-simple" class="comp-btn">Abrir cuenta</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <CTABand />
+</PageLayout>
+
+<style>
+  .page-hero { background-color: var(--gray-950); min-height: 280px; padding: 48px 0 56px; }
+  .page-hero__title { font-family: var(--font-head); font-weight: 800; color: var(--white); font-size: clamp(1.8rem,3.5vw,2.6rem); letter-spacing: -0.04em; margin: 12px 0 12px; line-height: 1.15; }
+  .page-hero__sub { font-size: 15px; color: rgba(255,255,255,0.62); margin: 0 0 24px; max-width: 520px; }
+  .page-hero__btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .filters { background-color: var(--white); padding: 24px 0; border-bottom: 1px solid var(--gray-200); }
+  .filter-tabs { display: inline-flex; background: var(--white); border: 1px solid var(--gray-200); padding: 5px; border-radius: 14px; gap: 2px; }
+  .filter-tab { padding: 9px 22px; font-size: 13.5px; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; background: transparent; color: var(--gray-500); transition: all 0.2s ease; font-family: var(--font-body); }
+  .filter-tab:hover { background-color: var(--red-50); color: var(--red-500); }
+  .filter-tab--active { background-color: var(--red-500); color: var(--white); box-shadow: 0 2px 8px rgba(255,9,1,0.25); }
+  .products-sec { background-color: var(--gray-50); padding: 72px 0; }
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .comparator-sec { background-color: var(--white); padding: 72px 0; }
+  .table-wrap { overflow-x: auto; margin-top: 32px; border-radius: var(--r-xl); border: 1px solid var(--gray-200); }
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .comp-table thead th { background-color: var(--gray-950); color: var(--white); font-family: var(--font-head); font-weight: 700; padding: 14px 20px; text-align: center; }
+  .comp-table thead th:first-child { text-align: left; }
+  .comp-table td { padding: 12px 20px; text-align: center; border-top: 1px solid var(--gray-200); color: var(--gray-700); }
+  .comp-table td:first-child { text-align: left; font-weight: 600; color: var(--gray-900); }
+  .comp-table tbody tr:nth-child(even) { background-color: var(--gray-50); }
+  .comp-btn { display: inline-block; padding: 7px 18px; background-color: var(--red-500); color: var(--white); border-radius: var(--r-sm); font-size: 12.5px; font-weight: 600; text-decoration: none; transition: all 0.2s ease; }
+  .comp-btn:hover { background-color: var(--red-600); }
+  @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 768px) { .products-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,4 +1,42 @@
 ---
-// CTABand — Banda de llamada a la acción roja
-// Contenido se implementará en el Paso 10 (Página 1)
+/**
+ * CTABand — banda de llamada a la acción roja con círculo decorativo.
+ */
+import Button from '../ui/Button.astro';
 ---
+
+<section class="cta-band" aria-label="Llamada a la acción">
+  <div class="cta-band__circle" aria-hidden="true"></div>
+  <div class="container cta-band__inner">
+    <div class="cta-band__text">
+      <span class="cta-band__eyebrow">Da el primer paso hoy</span>
+      <h2 class="cta-band__title">
+        Tu dinero puede hacer <em class="cta-band__accent">crecer</em> tu historia
+      </h2>
+      <p class="cta-band__subtitle">Únete a los 500,000 peruanos que ya impulsan sus sueños.</p>
+    </div>
+    <div class="cta-band__actions">
+      <Button variant="secondary" size="xl" href="/simuladores" iconRight="ArrowRight">Solicitar crédito ahora</Button>
+      <Button variant="ghost" size="lg" href="/institucional/">Hablar con un asesor</Button>
+      <div class="cta-band__ghost-sm">
+        <Button variant="ghost" size="sm" href="/para-ti/cuenta-simple">Abrir cuenta gratuita</Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band { background-color: var(--red-500); padding: 64px 0; position: relative; overflow: hidden; }
+  .cta-band__circle { position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; border-radius: 50%; background-color: rgba(0,0,0,0.08); pointer-events: none; }
+  .cta-band__inner { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; position: relative; z-index: 1; }
+  .cta-band__eyebrow { display: block; color: rgba(255,255,255,0.65); text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .cta-band__title { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.7rem,3vw,2.5rem); color: var(--white); letter-spacing: -0.04em; line-height: 1.15; margin: 0 0 10px; }
+  .cta-band__accent { color: var(--yellow-400); background-color: rgba(255,194,0,0.15); padding: 0 6px; border-radius: 4px; font-style: normal; }
+  .cta-band__subtitle { font-size: 15px; color: rgba(255,255,255,0.70); margin: 0; }
+  .cta-band__actions { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+  .cta-band__ghost-sm { opacity: 0.7; }
+  @media (max-width: 768px) {
+    .cta-band__inner { grid-template-columns: 1fr; text-align: center; }
+    .cta-band__actions { align-items: stretch; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  }
+</style>

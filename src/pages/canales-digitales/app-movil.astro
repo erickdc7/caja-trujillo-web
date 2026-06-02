@@ -1,4 +1,8 @@
 ---
-// App Móvil — Página de la aplicación móvil
-// Contenido se implementará en el Paso 10
+import PageLayout from '../../layouts/PageLayout.astro';import BreadCrumb from '../../components/shared/BreadCrumb.astro';import Button from '../../components/ui/Button.astro';import CTABand from '../../components/shared/CTABand.astro';
 ---
+<PageLayout title="App Móvil — Banca desde tu celular | Caja Trujillo" description="Descarga la App Caja Trujillo. Saldos, transferencias, pagos y más desde tu smartphone.">
+  <section class="page-hero"><div class="container"><BreadCrumb items={[{label:'Inicio',href:'/'},{label:'Canales digitales',href:'/canales-digitales/'},{label:'App Móvil'}]} /><h1 class="page-hero__title">Tu banco en el bolsillo</h1><p class="page-hero__sub">Descarga la App Caja Trujillo y realiza operaciones desde cualquier lugar con total seguridad biométrica.</p><div class="page-hero__btns"><Button variant="primary" size="lg" href="#">Descargar App</Button><Button variant="ghost" size="lg" href="/canales-digitales/">Ver otros canales</Button></div></div></section>
+  <CTABand />
+</PageLayout>
+<style>.page-hero{background-color:var(--gray-950);padding:60px 0 72px}.page-hero__title{font-family:var(--font-head);font-weight:800;color:var(--white);font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-0.04em;margin:12px 0;line-height:1.15}.page-hero__sub{font-size:15px;color:rgba(255,255,255,0.62);margin:0 0 24px;max-width:520px}.page-hero__btns{display:flex;gap:12px;flex-wrap:wrap}</style>

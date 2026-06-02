@@ -1,4 +1,54 @@
 ---
-// SegmentCards — Tarjetas de segmento (emprendedores, mujer, agrícola)
-// Contenido se implementará en el Paso 10 (Página 1)
+/**
+ * SegmentCards — tarjetas de segmento con banners de gradiente.
+ */
+import SectionHeader from '../ui/SectionHeader.astro';
+
+const segments = [
+  { name: 'Emprendedores', desc: 'Capital de trabajo, financiamiento y acompañamiento para hacer crecer tu negocio paso a paso.', category: 'Microempresa', href: '/para-tu-negocio/', gradient: 'linear-gradient(140deg,#1a0005,#4a0010,#800018)' },
+  { name: 'Mujer emprendedora', desc: 'Créditos con tasa preferencial y asesoría empresarial diseñados para mujeres que lideran.', category: 'Mujer empresaria', href: '/para-tu-negocio/empoderate-mujer', gradient: 'linear-gradient(140deg,#2d0045,#5c0080,#8b1a6b)' },
+  { name: 'Sector agrícola', desc: 'Financiamiento con cronogramas adaptados a tus ciclos de cosecha y producción en el campo.', category: 'Agro', href: '/para-tu-negocio/agricola-emprendedor', gradient: 'linear-gradient(140deg,#0a1f00,#1c4400,#2e6600)' },
+];
 ---
+
+<section class="segments" aria-label="Segmentos">
+  <div class="container">
+    <SectionHeader eyebrow="Contigo siempre" title="Soluciones para cada historia de vida" align="center" />
+    <div class="segments__grid">
+      {segments.map((seg) => (
+        <a href={seg.href} class="seg-card">
+          <div class="seg-card__banner" style={`background: ${seg.gradient}`}>
+            <div class="seg-card__dots" aria-hidden="true"></div>
+            <span class="seg-card__cat">{seg.category}</span>
+          </div>
+          <div class="seg-card__body">
+            <h3 class="seg-card__name">{seg.name}</h3>
+            <p class="seg-card__desc">{seg.desc}</p>
+            <span class="seg-card__link">
+              Conocer más
+              <svg class="seg-card__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .segments { background-color: var(--gray-50); padding: 72px 0; }
+  .segments__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 32px; }
+  .seg-card { display: block; background-color: var(--white); border: 1.5px solid var(--gray-200); border-radius: var(--r-2xl); overflow: hidden; text-decoration: none; transition: all 0.25s ease; }
+  .seg-card:hover { border-color: var(--red-200); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+  .seg-card:focus-visible { outline: 2px solid var(--red-500); outline-offset: 2px; }
+  .seg-card__banner { position: relative; height: 185px; display: flex; align-items: flex-end; padding: 18px; }
+  .seg-card__dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 22px 22px; }
+  .seg-card__cat { position: relative; z-index: 1; background-color: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.20); color: rgba(255,255,255,0.75); padding: 3px 10px; border-radius: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .seg-card__body { padding: 18px 22px 22px; }
+  .seg-card__name { font-family: var(--font-head); font-weight: 800; font-size: 17px; color: var(--gray-900); letter-spacing: -0.03em; line-height: 1.25; margin: 0 0 8px; }
+  .seg-card__desc { font-size: 12.5px; color: var(--gray-600); line-height: 1.6; margin: 0 0 14px; }
+  .seg-card__link { display: flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 700; color: var(--red-500); }
+  .seg-card__arrow { transition: transform 0.25s ease; }
+  .seg-card:hover .seg-card__arrow { transform: translateX(4px); }
+  @media (max-width: 768px) { .segments__grid { grid-template-columns: 1fr; } }
+</style>

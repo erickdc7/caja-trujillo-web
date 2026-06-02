@@ -1,7 +1,94 @@
 ---
-// [slug] — Detalle de noticia (ruta dinámica)
-// Contenido se implementará en el Paso 10 (Página 10)
+import PageLayout from '../../layouts/PageLayout.astro';
+import BreadCrumb from '../../components/shared/BreadCrumb.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import newsData from '../../data/news.json';
+
 export function getStaticPaths() {
-  return [];
+  return newsData.map((n: any) => ({ params: { slug: n.slug }, props: { news: n } }));
 }
+
+const { news } = Astro.props as { news: any };
+const otherNews = newsData.filter((n: any) => n.slug !== news.slug).slice(0, 2);
+
+const newsIconSvg: Record<string, string> = {
+  Building2: '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/>',
+  Smartphone: '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>',
+  Sprout: '<path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>',
+};
 ---
+
+<PageLayout title={`${news.title} | Noticias — Caja Trujillo`} description={news.excerpt}>
+  <!-- Hero -->
+  <section class="article-hero">
+    <div class="container">
+      <BreadCrumb items={[{label:'Inicio',href:'/'},{label:'Noticias',href:'/noticias/'},{label:news.title.slice(0,40)+'…'}]} />
+      <Badge variant="category" text={news.category} />
+      <span class="article-date">{news.dateFormatted}</span>
+      <h1 class="article-hero__title">{news.title}</h1>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="article-sec">
+    <div class="container article-grid">
+      <!-- Article -->
+      <article class="article">
+        <div class="article__thumb">
+          <div class="article__icon-wrap">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={newsIconSvg[news.categoryIcon] || ''} />
+          </div>
+        </div>
+        <div class="article__content">
+          <p>{news.excerpt}</p>
+          <p>Caja Trujillo continúa innovando para ofrecer las mejores soluciones financieras a sus más de 500,000 clientes en las 20 regiones donde tiene presencia. Como parte de nuestro compromiso con la transparencia y la inclusión financiera, desarrollamos productos y servicios que se adaptan a las necesidades reales de las personas y los emprendedores del Perú.</p>
+          <p>Esta iniciativa forma parte del plan estratégico 2025-2027 que busca fortalecer la posición de Caja Trujillo como la principal institución microfinanciera del norte del país, impulsando el desarrollo económico local y acompañando a cada cliente en su camino hacia el crecimiento.</p>
+          <p>Para más información, visita nuestras agencias o comunícate con nuestra central de atención al 0800-41-888 (llamada gratuita).</p>
+        </div>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar__card">
+          <h3 class="sidebar__heading">Más noticias</h3>
+          {otherNews.map((n: any) => (
+            <a href={`/noticias/${n.slug}`} class="sidebar__mini">
+              <Badge variant="category" text={n.category} />
+              <span class="sidebar__mini-title">{n.title}</span>
+              <span class="sidebar__mini-date">{n.dateFormatted}</span>
+            </a>
+          ))}
+        </div>
+        <div class="sidebar__cta">
+          <h3 class="sidebar__cta-title">¿Te interesa?</h3>
+          <p class="sidebar__cta-desc">Conoce nuestros productos y servicios.</p>
+          <Button variant="primary" size="sm" href="/para-ti/">Ver productos</Button>
+        </div>
+      </aside>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .article-hero{background:var(--gray-950);padding:48px 0 56px}
+  .article-date{font-size:12px;color:rgba(255,255,255,0.45);display:block;margin:8px 0}
+  .article-hero__title{font-family:var(--font-head);font-weight:800;color:var(--white);font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-0.04em;line-height:1.2;margin:0;max-width:700px}
+  .article-sec{padding:72px 0}
+  .article-grid{display:grid;grid-template-columns:2fr 1fr;gap:32px}
+  .article{background:var(--white);padding:40px;border-radius:var(--r-xl);box-shadow:var(--shadow-sm)}
+  .article__thumb{width:100%;height:400px;background:var(--gray-100);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;margin-bottom:32px}
+  .article__icon-wrap{width:80px;height:80px;border-radius:50%;background:var(--gray-200);display:flex;align-items:center;justify-content:center}
+  .article__icon-wrap svg{color:var(--gray-400)}
+  .article__content p{font-size:15px;color:var(--gray-700);line-height:1.75;margin:0 0 18px}
+  .sidebar{display:flex;flex-direction:column;gap:16px}
+  .sidebar__card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-xl);padding:24px}
+  .sidebar__heading{font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--gray-900);margin:0 0 16px}
+  .sidebar__mini{display:block;text-decoration:none;padding:12px 0;border-top:1px solid var(--gray-200)}
+  .sidebar__mini-title{display:block;font-family:var(--font-head);font-weight:600;font-size:13.5px;color:var(--gray-900);margin:6px 0 4px;line-height:1.35}
+  .sidebar__mini-date{font-size:11px;color:var(--gray-400)}
+  .sidebar__cta{background:var(--red-50);border:1px solid var(--red-100);border-radius:var(--r-xl);padding:24px}
+  .sidebar__cta-title{font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--red-600);margin:0 0 6px}
+  .sidebar__cta-desc{font-size:13px;color:var(--gray-600);margin:0 0 14px}
+  @media(max-width:768px){.article-grid{grid-template-columns:1fr}.article{padding:24px}.article__thumb{height:240px}}
+</style>

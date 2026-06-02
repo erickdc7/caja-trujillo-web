@@ -1,17 +1,138 @@
 ---
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import NoticeBanner from '../components/shared/NoticeBanner.astro';
+import QuickAccess from '../components/home/QuickAccess.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import ProductTabs from '../components/react/ProductTabs';
+import TrustStrip from '../components/home/TrustStrip.astro';
+import DigitalChannels from '../components/home/DigitalChannels.astro';
+import SegmentCards from '../components/home/SegmentCards.astro';
+import CTABand from '../components/shared/CTABand.astro';
+import Badge from '../components/ui/Badge.astro';
 
+import productsPersonas from '../data/products-personas.json';
+import productsNegocios from '../data/products-negocios.json';
+import productsSeguros from '../data/products-seguros.json';
+import newsData from '../data/news.json';
+
+const newsIconSvg: Record<string, string> = {
+  Building2: '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/>',
+  Smartphone: '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>',
+  Sprout: '<path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>',
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<PageLayout title="Caja Trujillo — Microfinanzas del Perú | Créditos, ahorros y seguros" description="Caja Municipal de Ahorro y Crédito de Trujillo. Créditos, cuentas de ahorro, seguros y canales digitales para personas y negocios en 20 regiones del Perú.">
+
+  <!-- 1. Hero -->
+  <Hero />
+
+  <!-- 2. Notice Banner -->
+  <NoticeBanner />
+
+  <!-- 3. Quick Access -->
+  <QuickAccess />
+
+  <!-- 4. Productos -->
+  <section class="products-section" aria-label="Nuestros productos">
+    <div class="container">
+      <div class="products-header">
+        <SectionHeader eyebrow="Nuestros productos" title="Lo que necesitas, cuando lo necesitas" />
+        <Button variant="outline" size="sm" href="/para-ti/">Ver todos los productos</Button>
+      </div>
+      <ProductTabs client:idle tabs={[
+        { label: 'Para personas', panelId: 'personas' },
+        { label: 'Para negocios', panelId: 'negocios' },
+        { label: 'Seguros', panelId: 'seguros' },
+      ]}>
+        {/* Panel personas */}
+        <div class="products-grid">
+          {productsPersonas.map((p: any) => <Card product={p} featured={p.featured} />)}
+        </div>
+        {/* Panel negocios */}
+        <div class="products-grid">
+          {productsNegocios.map((p: any) => <Card product={p} featured={p.featured} />)}
+        </div>
+        {/* Panel seguros */}
+        <div class="products-grid">
+          {productsSeguros.map((p: any) => <Card product={p} />)}
+        </div>
+      </ProductTabs>
+    </div>
+  </section>
+
+  <!-- 5. Trust Strip -->
+  <TrustStrip />
+
+  <!-- 6. Digital Channels -->
+  <DigitalChannels />
+
+  <!-- 7. Segments -->
+  <SegmentCards />
+
+  <!-- 8. Noticias -->
+  <section class="news-section" aria-label="Noticias">
+    <div class="container">
+      <div class="products-header">
+        <SectionHeader eyebrow="Noticias" title="Mantente informado" />
+        <Button variant="outline" size="sm" href="/noticias/">Ver todas las noticias</Button>
+      </div>
+      <div class="news-grid">
+        {newsData.map((news: any) => (
+          <a href={`/noticias/${news.slug}`} class:list={['news-card', { 'news-card--featured': news.featured }]}>
+            <div class:list={['news-card__thumb', { 'news-card__thumb--featured': news.featured }]}>
+              <div class="news-card__icon-wrap">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={newsIconSvg[news.categoryIcon] || ''} />
+              </div>
+              <Badge variant="category" text={news.category} class="news-card__badge" />
+            </div>
+            <div class="news-card__body">
+              <span class="news-card__date">{news.dateFormatted}</span>
+              <h3 class:list={['news-card__title', { 'news-card__title--featured': news.featured }]}>{news.title}</h3>
+              <p class="news-card__excerpt">{news.excerpt}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CTA Band -->
+  <CTABand />
+
+</PageLayout>
+
+<style>
+  .products-section { background-color: var(--gray-50); padding: 72px 0; }
+  .products-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .news-section { background-color: var(--white); padding: 72px 0; }
+  .news-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; }
+  .news-card { display: block; background-color: var(--white); border: 1.5px solid var(--gray-200); border-radius: var(--r-lg); overflow: hidden; text-decoration: none; transition: all 0.25s ease; }
+  .news-card:hover { border-color: var(--red-200); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .news-card:focus-visible { outline: 2px solid var(--red-500); outline-offset: 2px; }
+  .news-card__thumb { position: relative; height: 190px; background-color: var(--gray-100); display: flex; align-items: center; justify-content: center; }
+  .news-card__thumb--featured { height: 230px; }
+  .news-card__icon-wrap { width: 64px; height: 64px; border-radius: 50%; background-color: var(--gray-200); display: flex; align-items: center; justify-content: center; }
+  .news-card__icon-wrap svg { color: var(--gray-400); }
+  .news-card__body { padding: 16px 18px 18px; }
+  .news-card__date { font-size: 11.5px; color: var(--gray-400); display: block; margin-bottom: 6px; }
+  .news-card__title { font-family: var(--font-head); font-weight: 700; font-size: 14.5px; color: var(--gray-900); letter-spacing: -0.02em; line-height: 1.35; margin: 0 0 6px; }
+  .news-card__title--featured { font-size: 17px; }
+  .news-card__excerpt { font-size: 12.5px; color: var(--gray-600); line-height: 1.5; margin: 0; }
+  @media (max-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .news-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .products-grid { grid-template-columns: 1fr; }
+    .news-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<style is:global>
+  .news-card__badge { position: absolute; bottom: 10px; left: 10px; }
+</style>

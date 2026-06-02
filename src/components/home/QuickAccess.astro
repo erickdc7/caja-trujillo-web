@@ -1,4 +1,49 @@
 ---
-// QuickAccess — Grid de accesos rápidos (pagar cuota, simular, etc.)
-// Contenido se implementará en el Paso 10 (Página 1)
+/**
+ * QuickAccess — grid de accesos rápidos del homepage.
+ */
+import quickAccessData from '../../data/quick-access.json';
+
+const iconSvg: Record<string, string> = {
+  CreditCard: '<rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>',
+  Calculator: '<rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><line x1="8" x2="8" y1="14" y2="14.01"/><line x1="12" x2="12" y1="14" y2="14.01"/><line x1="8" x2="8" y1="18" y2="18.01"/><line x1="12" x2="12" y1="18" y2="18.01"/><line x1="8" x2="16" y1="10" y2="10"/>',
+  UserPlus: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/>',
+  ArrowRight: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  DollarSign: '<line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+  Landmark: '<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+  MapPin: '<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
+  Phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+};
 ---
+
+<section class="quick-access" aria-label="Accesos rápidos">
+  <div class="container">
+    <span class="quick-access__label">Accesos rápidos</span>
+    <div class="quick-access__grid">
+      {quickAccessData.map((item: { icon: string; label: string; href: string }) => (
+        <a href={item.href} class="quick-access__item">
+          <div class="quick-access__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={iconSvg[item.icon] || ''} />
+          </div>
+          <span class="quick-access__text">{item.label}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .quick-access { background-color: var(--white); padding: 30px 0; border-bottom: 1px solid var(--gray-200); }
+  .quick-access__label { display: block; font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--gray-400); letter-spacing: 0.09em; margin-bottom: 14px; }
+  .quick-access__grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; }
+  .quick-access__item { display: flex; flex-direction: column; align-items: center; gap: 7px; padding: 14px 6px; border-radius: var(--r-md); border: 1.5px solid transparent; text-decoration: none; transition: all 0.2s ease; }
+  .quick-access__item:hover { background-color: var(--red-50); border-color: var(--red-200); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .quick-access__icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background-color: var(--gray-100); border-radius: 11px; transition: all 0.2s ease; }
+  .quick-access__icon svg { color: var(--gray-600); transition: color 0.2s ease; }
+  .quick-access__item:hover .quick-access__icon { background-color: var(--red-500); }
+  .quick-access__item:hover .quick-access__icon svg { color: var(--white); }
+  .quick-access__text { font-size: 11px; font-weight: 600; color: var(--gray-600); text-align: center; line-height: 1.3; transition: color 0.2s ease; }
+  .quick-access__item:hover .quick-access__text { color: var(--red-500); }
+  .quick-access__item:focus-visible { outline: 2px solid var(--red-500); outline-offset: 2px; }
+  @media (max-width: 768px) { .quick-access__grid { grid-template-columns: repeat(4, 1fr); } }
+</style>

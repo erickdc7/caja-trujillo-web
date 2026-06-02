@@ -1,4 +1,10 @@
 ---
-// Mi Local Comercial — Crédito para infraestructura de negocio
-// Contenido se implementará en el Paso 10
+import PageLayout from '../../layouts/PageLayout.astro';import BreadCrumb from '../../components/shared/BreadCrumb.astro';import Button from '../../components/ui/Button.astro';import CTABand from '../../components/shared/CTABand.astro';
+import products from '../../data/products-negocios.json';
+const p = products.find((x:any)=>x.slug==='mi-local-comercial')!;
 ---
+<PageLayout title={p.metaTitle} description={p.metaDesc}>
+  <section class="page-hero"><div class="container"><BreadCrumb items={[{label:'Inicio',href:'/'},{label:'Para tu negocio',href:'/para-tu-negocio/'},{label:'Mi Local Comercial'}]} /><h1 class="page-hero__title">Invierte en el local que tu negocio necesita</h1><p class="page-hero__sub">{p.shortDesc}</p><div class="page-hero__btns"><Button variant="primary" size="lg" href="/simuladores" iconRight="ArrowRight">Solicitar crédito</Button><Button variant="ghost" size="lg" href="/para-tu-negocio/">Ver más productos</Button></div></div></section>
+  <CTABand />
+</PageLayout>
+<style>.page-hero{background-color:var(--gray-950);padding:60px 0 72px}.page-hero__title{font-family:var(--font-head);font-weight:800;color:var(--white);font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-0.04em;margin:12px 0;line-height:1.15}.page-hero__sub{font-size:15px;color:rgba(255,255,255,0.62);margin:0 0 24px;max-width:520px}.page-hero__btns{display:flex;gap:12px;flex-wrap:wrap}</style>

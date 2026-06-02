@@ -1,4 +1,95 @@
 ---
-// 404 — Página de error
-// Contenido se implementará en el Paso 10 (Página 12)
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
 ---
+
+<BaseLayout title="404 — Página no encontrada | Caja Trujillo" description="La página que buscas no existe o ha sido movida.">
+  <div class="error-page">
+    <div class="error-page__inner">
+      <!-- 404 gigante -->
+      <div class="error-page__num" aria-hidden="true">
+        <span class="error-page__num-back">404</span>
+        <span class="error-page__num-front animate-float">404</span>
+      </div>
+
+      <h1 class="error-page__title">Esta página no existe</h1>
+      <p class="error-page__desc">La página que buscas pudo haber sido eliminada, renombrada o quizás nunca existió.</p>
+
+      <div class="error-page__actions">
+        <Button variant="primary" size="md" href="/" iconRight="ArrowRight">Ir al inicio</Button>
+        <Button variant="ghost" size="md" href="/para-ti/">Ver productos</Button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .error-page {
+    background-color: var(--gray-950);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 24px;
+  }
+
+  .error-page__inner {
+    max-width: 520px;
+  }
+
+  .error-page__num {
+    position: relative;
+    margin-bottom: 0;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .error-page__num-back,
+  .error-page__num-front {
+    font-family: var(--font-head);
+    font-weight: 900;
+    font-size: 180px;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    position: absolute;
+  }
+
+  .error-page__num-back {
+    color: var(--red-500);
+    opacity: 0.12;
+    z-index: 0;
+  }
+
+  .error-page__num-front {
+    color: var(--red-500);
+    position: relative;
+    z-index: 1;
+  }
+
+  .error-page__title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--white);
+    margin: -20px 0 12px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .error-page__desc {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 15px;
+    margin: 0 0 32px;
+    line-height: 1.6;
+  }
+
+  .error-page__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

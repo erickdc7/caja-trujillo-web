@@ -1,4 +1,82 @@
 ---
-// Simuladores — Simuladores financieros interactivos
-// Contenido se implementará en el Paso 10 (Página 8)
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import SimuladorPage from '../components/react/SimuladorPage';
 ---
+
+<PageLayout title="Simuladores financieros — Calcula tu cuota | Caja Trujillo" description="Simula tu crédito personal, crédito negocio o plazo fijo. Calcula cuotas, intereses y plazos sin compromiso.">
+
+  <!-- Hero compacto -->
+  <section class="sim-hero">
+    <div class="container">
+      <h1 class="sim-hero__title">Simuladores financieros</h1>
+      <p class="sim-hero__sub">Calcula tu cuota antes de solicitar. Sin compromiso.</p>
+    </div>
+  </section>
+
+  <!-- Simuladores -->
+  <section class="sim-sec">
+    <div class="container">
+      <SimuladorPage client:load />
+    </div>
+  </section>
+
+  <!-- Tasas vigentes -->
+  <section class="rates-sec">
+    <div class="container">
+      <SectionHeader eyebrow="Transparencia" title="Tasas vigentes" />
+      <div class="rates-grid">
+        <div class="rate-table-wrap">
+          <h3 class="rate-heading">Créditos</h3>
+          <table class="rate-table">
+            <thead><tr><th>Producto</th><th>TEA mín</th><th>TEA máx</th><th>TCEA</th></tr></thead>
+            <tbody>
+              <tr><td>Credijoya</td><td>42.0%</td><td>55.0%</td><td>58.2%</td></tr>
+              <tr><td>Crece Mujer</td><td>28.0%</td><td>38.0%</td><td>41.5%</td></tr>
+              <tr><td>Microemprendedor</td><td>30.0%</td><td>45.0%</td><td>48.8%</td></tr>
+              <tr><td>Hipotecaja+</td><td>12.0%</td><td>18.0%</td><td>20.1%</td></tr>
+              <tr><td>Facilito</td><td>35.0%</td><td>50.0%</td><td>54.2%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="rate-table-wrap">
+          <h3 class="rate-heading">Ahorros</h3>
+          <table class="rate-table">
+            <thead><tr><th>Producto</th><th>TEA anual</th><th>Plazo mínimo</th></tr></thead>
+            <tbody>
+              <tr><td>Cuenta Simple</td><td>3.5%</td><td>—</td></tr>
+              <tr><td>Plazo Fijo 30 días</td><td>4.5%</td><td>30 días</td></tr>
+              <tr><td>Plazo Fijo 90 días</td><td>5.5%</td><td>90 días</td></tr>
+              <tr><td>Plazo Fijo 180 días</td><td>6.5%</td><td>180 días</td></tr>
+              <tr><td>Plazo Fijo 360 días</td><td>8.0%</td><td>360 días</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="rates-note">Tasas referenciales. Consulta en agencia para tu caso específico.</p>
+      <div class="rates-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+        Regulado por SBS
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .sim-hero{background:var(--gray-950);padding:48px 0 56px}
+  .sim-hero__title{font-family:var(--font-head);font-weight:800;color:var(--white);font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-0.04em;margin:0 0 8px}
+  .sim-hero__sub{font-size:15px;color:rgba(255,255,255,0.62);margin:0}
+  .sim-sec{background:var(--white);padding:72px 0}
+  .rates-sec{background:var(--gray-50);padding:72px 0}
+  .rates-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+  .rate-table-wrap{overflow-x:auto}
+  .rate-heading{font-family:var(--font-head);font-weight:700;font-size:16px;color:var(--gray-900);margin:0 0 12px}
+  .rate-table{width:100%;border-collapse:collapse;border:1px solid var(--gray-200);border-radius:var(--r-lg);overflow:hidden;font-size:13.5px}
+  .rate-table thead th{background:var(--gray-950);color:var(--white);padding:10px 14px;text-align:left;font-weight:600;font-size:12px}
+  .rate-table td{padding:10px 14px;border-top:1px solid var(--gray-200);color:var(--gray-700)}
+  .rate-table tbody tr:nth-child(even){background:var(--gray-50)}
+  .rates-note{font-size:12px;color:var(--gray-500);font-style:italic;margin:20px 0 12px}
+  .rates-badge{display:inline-flex;align-items:center;gap:6px;background:var(--yellow-50);border:1px solid var(--yellow-200);padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;color:var(--yellow-600)}
+  .rates-badge svg{color:var(--yellow-500)}
+  @media(max-width:768px){.rates-grid{grid-template-columns:1fr}}
+</style>

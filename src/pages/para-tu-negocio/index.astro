@@ -1,4 +1,64 @@
 ---
-// Para tu negocio — Hub de productos para emprendedores
-// Contenido se implementará en el Paso 10 (Página 5)
+import PageLayout from '../../layouts/PageLayout.astro';
+import BreadCrumb from '../../components/shared/BreadCrumb.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import Card from '../../components/ui/Card.astro';
+import CTABand from '../../components/shared/CTABand.astro';
+import products from '../../data/products-negocios.json';
+
+const segments = [
+  { name: 'Microempresa', desc: 'Capital de trabajo y financiamiento para tu negocio.', category: 'Microempresa', href: '/para-tu-negocio/microemprendedor', gradient: 'linear-gradient(140deg,#1a0005,#4a0010,#800018)' },
+  { name: 'Sector Agro', desc: 'Créditos adaptados a tus ciclos productivos.', category: 'Agro', href: '/para-tu-negocio/agricola-emprendedor', gradient: 'linear-gradient(140deg,#0a1f00,#1c4400,#2e6600)' },
+  { name: 'Mujer empresaria', desc: 'Tasa preferencial y acompañamiento empresarial.', category: 'Mujer', href: '/para-tu-negocio/empoderate-mujer', gradient: 'linear-gradient(140deg,#2d0045,#5c0080,#8b1a6b)' },
+];
 ---
+<PageLayout title="Para tu negocio — Financiamiento para emprendedores | Caja Trujillo" description="Créditos para microempresas, agro y mujeres empresarias. Capital de trabajo con las mejores condiciones.">
+  <section class="page-hero"><div class="container">
+    <BreadCrumb items={[{label:'Inicio',href:'/'},{label:'Para tu negocio'}]} />
+    <Badge variant="eyebrow" text="Para emprendedores" />
+    <h1 class="page-hero__title">Financiamiento para cada tipo de negocio</h1>
+    <p class="page-hero__sub">Inyecta capital a tu empresa con créditos ágiles, tasas competitivas y sin burocracia.</p>
+    <div class="page-hero__btns"><Button variant="primary" size="lg" href="/simuladores" iconRight="ArrowRight">Solicitar crédito</Button><Button variant="ghost" size="lg" href="/simuladores">Ver simuladores</Button></div>
+  </div></section>
+
+  <section class="segments-sec"><div class="container">
+    <SectionHeader eyebrow="Segmentos" title="¿Cuál describe mejor tu negocio?" align="center" />
+    <div class="seg-grid">
+      {segments.map(seg=>(
+        <a href={seg.href} class="seg-card">
+          <div class="seg-card__banner" style={`background:${seg.gradient}`}><div class="seg-card__dots" aria-hidden="true"></div><span class="seg-card__cat">{seg.category}</span></div>
+          <div class="seg-card__body"><h3 class="seg-card__name">{seg.name}</h3><p class="seg-card__desc">{seg.desc}</p><span class="seg-card__link">Conocer más <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+        </a>
+      ))}
+    </div>
+  </div></section>
+
+  <section class="products-sec"><div class="container">
+    <SectionHeader eyebrow="Todos los productos" title="Créditos para negocios" />
+    <div class="products-grid">{products.map((p:any)=><Card product={p} featured={p.featured} />)}</div>
+  </div></section>
+
+  <CTABand />
+</PageLayout>
+<style>
+  .page-hero{background-color:var(--gray-950);padding:48px 0 56px}
+  .page-hero__title{font-family:var(--font-head);font-weight:800;color:var(--white);font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-0.04em;margin:12px 0;line-height:1.15}
+  .page-hero__sub{font-size:15px;color:rgba(255,255,255,0.62);margin:0 0 24px;max-width:520px}
+  .page-hero__btns{display:flex;gap:12px;flex-wrap:wrap}
+  .segments-sec{background:var(--white);padding:72px 0}
+  .seg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
+  .seg-card{display:block;background:var(--white);border:1.5px solid var(--gray-200);border-radius:var(--r-2xl);overflow:hidden;text-decoration:none;transition:all .25s ease}
+  .seg-card:hover{border-color:var(--red-200);box-shadow:var(--shadow-md);transform:translateY(-4px)}
+  .seg-card__banner{position:relative;height:185px;display:flex;align-items:flex-end;padding:18px}
+  .seg-card__dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.06) 1px,transparent 1px);background-size:22px 22px}
+  .seg-card__cat{position:relative;z-index:1;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);color:rgba(255,255,255,0.75);padding:3px 10px;border-radius:4px;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;font-weight:600}
+  .seg-card__body{padding:18px 22px 22px}
+  .seg-card__name{font-family:var(--font-head);font-weight:800;font-size:17px;color:var(--gray-900);margin:0 0 8px}
+  .seg-card__desc{font-size:12.5px;color:var(--gray-600);line-height:1.6;margin:0 0 14px}
+  .seg-card__link{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--red-500)}
+  .products-sec{background:var(--gray-50);padding:72px 0}
+  .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
+  @media(max-width:768px){.seg-grid,.products-grid{grid-template-columns:1fr}}
+</style>

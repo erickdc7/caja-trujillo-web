@@ -1,4 +1,126 @@
 ---
-// Hero — Sección hero principal con estadísticas y simulador
-// Contenido se implementará en el Paso 10 (Página 1)
+/**
+ * Hero — sección hero principal del homepage con simulador.
+ */
+import Button from '../ui/Button.astro';
+import CreditSimulator from '../react/CreditSimulator';
 ---
+
+<section class="hero" aria-label="Hero principal">
+  <!-- Capas decorativas -->
+  <div class="hero__grid-pattern" aria-hidden="true"></div>
+  <div class="hero__glow-red" aria-hidden="true"></div>
+  <div class="hero__glow-yellow" aria-hidden="true"></div>
+
+  <div class="container hero__inner">
+    <!-- Columna izquierda -->
+    <div class="hero__content">
+      <div class="hero__eyebrow">
+        <span class="hero__dot animate-blink" aria-hidden="true"></span>
+        <span>Más de 40 años impulsando el Perú</span>
+      </div>
+
+      <h1 class="hero__title">
+        Soluciones financieras que <span class="hero__accent">impulsan</span> tu futuro
+      </h1>
+
+      <p class="hero__desc">
+        Créditos, ahorros y seguros diseñados para personas y negocios. Con la confianza de más de 500,000 peruanos y presencia en 20 regiones.
+      </p>
+
+      <div class="hero__buttons">
+        <Button variant="primary" size="lg" href="/simuladores" iconRight="ArrowRight">Solicitar crédito ahora</Button>
+        <Button variant="ghost" size="lg" href="/para-ti/">Ver todos los productos</Button>
+      </div>
+
+      <!-- Stats -->
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-num">42<span class="hero__stat-plus">+</span></span>
+          <span class="hero__stat-label">años de experiencia</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">500<span class="hero__stat-plus">K</span></span>
+          <span class="hero__stat-label">clientes activos</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">20</span>
+          <span class="hero__stat-label">regiones del Perú</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">AA<span class="hero__stat-red">+</span></span>
+          <span class="hero__stat-label">calificación SBS</span>
+        </div>
+      </div>
+
+      <!-- Slider dots -->
+      <div class="hero__dots" role="tablist" aria-label="Indicadores de slide">
+        <button class="hero__dot-btn hero__dot-btn--active" role="tab" aria-selected="true" aria-label="Slide 1"></button>
+        <button class="hero__dot-btn" role="tab" aria-selected="false" aria-label="Slide 2"></button>
+        <button class="hero__dot-btn" role="tab" aria-selected="false" aria-label="Slide 3"></button>
+      </div>
+    </div>
+
+    <!-- Columna derecha — Simulador -->
+    <div class="hero__simulator">
+      <CreditSimulator
+        client:load
+        initialAmount={5000}
+        maxAmount={50000}
+        minAmount={500}
+        maxMonths={36}
+        tea={28.5}
+        productName="Crédito personal"
+        ctaHref="/simuladores"
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  function initHeroDots() {
+    const dots = document.querySelectorAll('.hero__dot-btn');
+    if (!dots.length) return;
+    let active = 0;
+    function setActive(i: number) {
+      dots.forEach((d, idx) => {
+        d.classList.toggle('hero__dot-btn--active', idx === i);
+        d.setAttribute('aria-selected', String(idx === i));
+      });
+      active = i;
+    }
+    dots.forEach((d, i) => d.addEventListener('click', () => setActive(i)));
+    setInterval(() => setActive((active + 1) % dots.length), 4000);
+  }
+  document.addEventListener('DOMContentLoaded', initHeroDots);
+  document.addEventListener('astro:after-swap', initHeroDots);
+</script>
+
+<style>
+  .hero { background-color: var(--gray-950); min-height: 580px; position: relative; overflow: hidden; }
+  .hero__grid-pattern { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; }
+  .hero__glow-red { position: absolute; top: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,9,1,0.14) 0%, transparent 70%); pointer-events: none; }
+  .hero__glow-yellow { position: absolute; bottom: -200px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,194,0,0.07) 0%, transparent 70%); pointer-events: none; }
+  .hero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 400px; gap: 48px; padding: 80px 0; }
+  .hero__content { display: flex; flex-direction: column; justify-content: center; }
+  .hero__eyebrow { display: flex; align-items: center; gap: 8px; color: var(--yellow-400); text-transform: uppercase; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 20px; }
+  .hero__dot { width: 6px; height: 6px; border-radius: 50%; background-color: var(--yellow-400); flex-shrink: 0; }
+  .hero__title { font-family: var(--font-head); font-weight: 800; color: var(--white); font-size: clamp(2rem,4vw,3.1rem); letter-spacing: -0.04em; line-height: 1.1; margin: 0 0 18px; }
+  .hero__accent { color: var(--yellow-400); text-decoration: underline; text-decoration-color: var(--yellow-500); text-underline-offset: 6px; text-decoration-thickness: 3px; }
+  .hero__desc { font-size: 16px; color: rgba(255,255,255,0.62); max-width: 480px; line-height: 1.7; margin: 0 0 28px; }
+  .hero__buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+  .hero__stats { display: flex; gap: 36px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 24px; }
+  .hero__stat-num { font-family: var(--font-head); font-weight: 800; font-size: 26px; color: var(--white); letter-spacing: -0.04em; line-height: 1; display: block; }
+  .hero__stat-plus { color: var(--yellow-500); }
+  .hero__stat-red { color: var(--red-500); }
+  .hero__stat-label { font-size: 11.5px; color: rgba(255,255,255,0.45); font-weight: 500; }
+  .hero__dots { display: flex; gap: 6px; }
+  .hero__dot-btn { border: none; cursor: pointer; background-color: rgba(255,255,255,0.25); width: 7px; height: 7px; border-radius: 50%; padding: 0; transition: all 0.3s ease; }
+  .hero__dot-btn--active { width: 22px; height: 7px; border-radius: 4px; background-color: var(--red-500); }
+  .hero__simulator { display: flex; align-items: center; justify-content: center; }
+  @media (max-width: 768px) {
+    .hero__inner { grid-template-columns: 1fr; padding: 48px 0; }
+    .hero__simulator { display: none; }
+    .hero__stats { gap: 20px; flex-wrap: wrap; }
+  }
+</style>

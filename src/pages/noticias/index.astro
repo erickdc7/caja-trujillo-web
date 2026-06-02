@@ -1,4 +1,64 @@
 ---
-// Noticias — Sala de prensa
-// Contenido se implementará en el Paso 10 (Página 9)
+import PageLayout from '../../layouts/PageLayout.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import newsData from '../../data/news.json';
+
+const newsIconSvg: Record<string, string> = {
+  Building2: '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/>',
+  Smartphone: '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>',
+  Sprout: '<path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>',
+};
 ---
+
+<PageLayout title="Sala de prensa — Noticias | Caja Trujillo" description="Últimas noticias institucionales, lanzamientos de productos y novedades de Caja Trujillo.">
+  <section class="page-hero"><div class="container"><h1 class="page-hero__title">Sala de prensa</h1><p class="page-hero__sub">Noticias institucionales, lanzamientos y novedades de Caja Trujillo.</p></div></section>
+
+  <!-- Filtros -->
+  <section class="filters"><div class="container"><div class="filter-tabs" role="tablist"><button class="filter-tab filter-tab--active">Todas</button><button class="filter-tab">Institucional</button><button class="filter-tab">Digital</button><button class="filter-tab">Agro</button><button class="filter-tab">Productos</button></div></div></section>
+
+  <!-- Grid -->
+  <section class="news-sec"><div class="container">
+    <div class="news-grid">
+      {newsData.map((news: any) => (
+        <a href={`/noticias/${news.slug}`} class="news-card">
+          <div class="news-card__thumb">
+            <div class="news-card__icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={newsIconSvg[news.categoryIcon] || ''} /></div>
+            <Badge variant="category" text={news.category} class="news-card__badge" />
+          </div>
+          <div class="news-card__body">
+            <span class="news-card__date">{news.dateFormatted}</span>
+            <h3 class="news-card__title">{news.title}</h3>
+            <p class="news-card__excerpt">{news.excerpt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div class="news-more"><Button variant="outline" size="md" href="#">Cargar más noticias</Button></div>
+  </div></section>
+</PageLayout>
+
+<style>
+  .page-hero{background:var(--gray-950);padding:48px 0 56px}
+  .page-hero__title{font-family:var(--font-head);font-weight:800;color:var(--white);font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-0.04em;margin:0 0 8px}
+  .page-hero__sub{font-size:15px;color:rgba(255,255,255,0.62);margin:0}
+  .filters{background:var(--white);padding:24px 0;border-bottom:1px solid var(--gray-200)}
+  .filter-tabs{display:inline-flex;background:var(--white);border:1px solid var(--gray-200);padding:5px;border-radius:14px;gap:2px}
+  .filter-tab{padding:9px 22px;font-size:13.5px;font-weight:600;border:none;border-radius:10px;cursor:pointer;background:transparent;color:var(--gray-500);transition:all .2s ease;font-family:var(--font-body)}
+  .filter-tab:hover{background:var(--red-50);color:var(--red-500)}
+  .filter-tab--active{background:var(--red-500);color:var(--white);box-shadow:0 2px 8px rgba(255,9,1,0.25)}
+  .news-sec{background:var(--gray-50);padding:72px 0}
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .news-card{display:block;background:var(--white);border:1.5px solid var(--gray-200);border-radius:var(--r-lg);overflow:hidden;text-decoration:none;transition:all .25s ease}
+  .news-card:hover{border-color:var(--red-200);box-shadow:var(--shadow-md);transform:translateY(-3px)}
+  .news-card__thumb{position:relative;height:190px;background:var(--gray-100);display:flex;align-items:center;justify-content:center}
+  .news-card__icon-wrap{width:64px;height:64px;border-radius:50%;background:var(--gray-200);display:flex;align-items:center;justify-content:center}
+  .news-card__icon-wrap svg{color:var(--gray-400)}
+  .news-card__body{padding:16px 18px 18px}
+  .news-card__date{font-size:11.5px;color:var(--gray-400);display:block;margin-bottom:6px}
+  .news-card__title{font-family:var(--font-head);font-weight:700;font-size:14.5px;color:var(--gray-900);letter-spacing:-0.02em;line-height:1.35;margin:0 0 6px}
+  .news-card__excerpt{font-size:12.5px;color:var(--gray-600);line-height:1.5;margin:0}
+  .news-more{text-align:center;margin-top:40px}
+  @media(max-width:768px){.news-grid{grid-template-columns:1fr}}
+</style>
+<style is:global>.news-card__badge{position:absolute;bottom:10px;left:10px}</style>
