@@ -10,11 +10,11 @@
 @import "./animations.css";
 
 /* ===================================================
-   GOOGLE FONTS
+   GOOGLE FONTS — loaded via <link> in BaseLayout.astro
    Plus Jakarta Sans (headings): 600, 700, 800
    Inter (body): 400, 500, 600
+   font-display: swap configured in the Google Fonts URL
    =================================================== */
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap");
 
 /* ===================================================
    RESET
