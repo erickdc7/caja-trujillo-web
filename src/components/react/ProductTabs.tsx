@@ -13,6 +13,26 @@ interface Props {
 export default function ProductTabs({ tabs, children }: Props) {
   const [activeTab, setActiveTab] = useState(tabs[0]?.panelId ?? '');
 
+  function handleKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
+    const currentIndex = tabs.findIndex((t) => t.panelId === activeTab);
+    let newIndex = currentIndex;
+    if (e.key === 'ArrowRight') {
+      newIndex = (currentIndex + 1) % tabs.length;
+    } else if (e.key === 'ArrowLeft') {
+      newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    } else if (e.key === 'Home') {
+      newIndex = 0;
+    } else if (e.key === 'End') {
+      newIndex = tabs.length - 1;
+    } else {
+      return;
+    }
+    e.preventDefault();
+    setActiveTab(tabs[newIndex].panelId);
+    const btn = document.getElementById(`tab-${tabs[newIndex].panelId}`);
+    if (btn) btn.focus();
+  }
+
   return (
     <div>
       {/* Tab list */}
@@ -26,7 +46,9 @@ export default function ProductTabs({ tabs, children }: Props) {
               id={`tab-${tab.panelId}`}
               aria-selected={isActive}
               aria-controls={`panel-${tab.panelId}`}
+              tabIndex={isActive ? 0 : -1}
               onClick={() => setActiveTab(tab.panelId)}
+              onKeyDown={handleKeyDown}
               style={{
                 ...styles.tab,
                 ...(isActive ? styles.tabActive : styles.tabInactive),
@@ -59,6 +81,7 @@ export default function ProductTabs({ tabs, children }: Props) {
             id={`panel-${tab.panelId}`}
             role="tabpanel"
             aria-labelledby={`tab-${tab.panelId}`}
+            hidden={!isActive}
             style={{ display: isActive ? 'grid' : 'none' }}
           >
             {children[index]}

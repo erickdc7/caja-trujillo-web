@@ -92,7 +92,7 @@ export default function CreditSimulator({
       </select>
 
       {/* Resultados */}
-      <div style={styles.results}>
+      <div style={styles.results} aria-live="polite" aria-atomic="true">
         <div style={styles.row}>
           <span style={styles.rowLabel}>Cuota mensual aprox.</span>
           <span style={styles.rowValueGreen}>{fmt(result.cuota)}</span>

@@ -116,3 +116,43 @@ button {
     padding: 0 16px;
   }
 }
+
+/* ===================================================
+   TOUCH TARGETS — WCAG 2.5.5 (mínimo 44px × 44px)
+   =================================================== */
+@media (max-width: 768px) {
+  button,
+  [role="tab"],
+  [role="button"],
+  a.btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Evitar zoom en iOS — 16px mínimo en inputs móviles */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* ===================================================
+   PREFERS REDUCED MOTION — Accesibilidad
+   =================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-up,
+  .fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

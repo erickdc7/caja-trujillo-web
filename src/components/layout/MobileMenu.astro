@@ -77,7 +77,10 @@ import Button from '../ui/Button.astro';
     function closeMenu() {
       menu!.classList.remove('open');
       document.body.style.overflow = '';
-      if (burger) burger.setAttribute('aria-expanded', 'false');
+      if (burger) {
+        burger.setAttribute('aria-expanded', 'false');
+        burger.focus();
+      }
     }
 
     // Cerrar con botón X
@@ -91,6 +94,36 @@ import Button from '../ui/Button.astro';
         closeMenu();
       }
     });
+
+    // Focus trapping dentro del menú
+    menu.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      const focusable = menu!.querySelectorAll<HTMLElement>(
+        'a[href], button, [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    // Al abrir, mover foco al botón cerrar
+    const observer = new MutationObserver(() => {
+      if (menu!.classList.contains('open') && closeBtn) {
+        closeBtn.focus();
+      }
+    });
+    observer.observe(menu, { attributes: true, attributeFilter: ['class'] });
   }
 
   document.addEventListener('DOMContentLoaded', initMobileMenu);

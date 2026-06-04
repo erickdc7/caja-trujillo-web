@@ -170,6 +170,28 @@ const iconSvg: Record<string, string> = {
       }
     }, { passive: true });
 
+    // Mega-menú — Escape cierra y devuelve foco al trigger
+    const megaItems = navbar.querySelectorAll('.navbar__item--has-mega');
+    megaItems.forEach((item) => {
+      item.addEventListener('keydown', (e: Event) => {
+        const ke = e as KeyboardEvent;
+        if (ke.key === 'Escape') {
+          const trigger = item.querySelector('.navbar__link') as HTMLElement;
+          if (trigger) trigger.focus();
+          // Quitar focus-within forzando blur en el mega-menú
+          const mega = item.querySelector('.mega') as HTMLElement;
+          if (mega) {
+            mega.style.opacity = '0';
+            mega.style.pointerEvents = 'none';
+            setTimeout(() => {
+              mega.style.opacity = '';
+              mega.style.pointerEvents = '';
+            }, 200);
+          }
+        }
+      });
+    });
+
     // Hamburguesa — toggle mobile menu
     const burger = document.getElementById('burger-btn');
     if (burger) {

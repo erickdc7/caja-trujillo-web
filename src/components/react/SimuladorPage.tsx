@@ -9,12 +9,31 @@ export default function SimuladorPage() {
     { id: 'plazo', label: 'Plazo fijo' },
   ];
 
+  function handleTabKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
+    const currentIndex = tabs.findIndex((t) => t.id === activeTab);
+    let newIndex = currentIndex;
+    if (e.key === 'ArrowRight') newIndex = (currentIndex + 1) % tabs.length;
+    else if (e.key === 'ArrowLeft') newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    else if (e.key === 'Home') newIndex = 0;
+    else if (e.key === 'End') newIndex = tabs.length - 1;
+    else return;
+    e.preventDefault();
+    setActiveTab(tabs[newIndex].id);
+    const btn = document.getElementById(`sim-tab-${tabs[newIndex].id}`);
+    if (btn) btn.focus();
+  }
+
   return (
     <div>
       {/* Tabs */}
       <div style={s.tabList} role="tablist" aria-label="Tipo de simulación">
         {tabs.map((t) => (
-          <button key={t.id} role="tab" aria-selected={activeTab === t.id} onClick={() => setActiveTab(t.id)}
+          <button key={t.id} role="tab" id={`sim-tab-${t.id}`}
+            aria-selected={activeTab === t.id}
+            aria-controls={`sim-panel-${t.id}`}
+            tabIndex={activeTab === t.id ? 0 : -1}
+            onClick={() => setActiveTab(t.id)}
+            onKeyDown={handleTabKeyDown}
             style={{ ...s.tab, ...(activeTab === t.id ? s.tabActive : s.tabInactive) }}
             onMouseEnter={(e) => { if (activeTab !== t.id) { e.currentTarget.style.backgroundColor = '#FFF5F5'; e.currentTarget.style.color = '#FF0901'; } }}
             onMouseLeave={(e) => { if (activeTab !== t.id) { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#7A7A88'; } }}>
@@ -23,9 +42,15 @@ export default function SimuladorPage() {
         ))}
       </div>
 
-      {activeTab === 'personal' && <CreditSimForm tea={28.5} maxAmount={50000} minAmount={500} maxMonths={48} label="personal" />}
-      {activeTab === 'negocio' && <CreditSimForm tea={32} maxAmount={100000} minAmount={1000} maxMonths={48} label="negocio" />}
-      {activeTab === 'plazo' && <PlazoFijoSim />}
+      <div id="sim-panel-personal" role="tabpanel" aria-labelledby="sim-tab-personal" hidden={activeTab !== 'personal'}>
+        {activeTab === 'personal' && <CreditSimForm tea={28.5} maxAmount={50000} minAmount={500} maxMonths={48} label="personal" />}
+      </div>
+      <div id="sim-panel-negocio" role="tabpanel" aria-labelledby="sim-tab-negocio" hidden={activeTab !== 'negocio'}>
+        {activeTab === 'negocio' && <CreditSimForm tea={32} maxAmount={100000} minAmount={1000} maxMonths={48} label="negocio" />}
+      </div>
+      <div id="sim-panel-plazo" role="tabpanel" aria-labelledby="sim-tab-plazo" hidden={activeTab !== 'plazo'}>
+        {activeTab === 'plazo' && <PlazoFijoSim />}
+      </div>
     </div>
   );
 }
@@ -80,7 +105,7 @@ function CreditSimForm({ tea, maxAmount, minAmount, maxMonths, label }: { tea: n
       </div>
 
       {/* Result */}
-      <div style={s.resultCard}>
+      <div style={s.resultCard} aria-live="polite" aria-atomic="true">
         <span style={s.resultLabel}>Cuota mensual estimada</span>
         <div style={s.resultBig}>{fmt(calc.cuota)}</div>
         <div style={s.metricsGrid}>
@@ -96,12 +121,12 @@ function CreditSimForm({ tea, maxAmount, minAmount, maxMonths, label }: { tea: n
         </a>
 
         {/* Amortización */}
-        <button onClick={() => setShowTable(!showTable)} style={s.toggleBtn}>
+        <button onClick={() => setShowTable(!showTable)} style={s.toggleBtn} aria-expanded={showTable} aria-controls="amort-table">
           {showTable ? 'Ocultar' : 'Ver'} tabla de amortización
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ transform: showTable ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', marginLeft: 4 }}><path d="m6 9 6 6 6-6"/></svg>
         </button>
         {showTable && (
-          <div style={s.tableWrap}>
+          <div style={s.tableWrap} id="amort-table">
             <table style={s.table}>
               <thead><tr style={s.thRow}><th style={s.th}>N°</th><th style={s.th}>Capital</th><th style={s.th}>Interés</th><th style={s.th}>Cuota</th><th style={s.th}>Saldo</th></tr></thead>
               <tbody>
