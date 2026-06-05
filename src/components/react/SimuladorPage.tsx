@@ -83,7 +83,7 @@ function CreditSimForm({ tea, maxAmount, minAmount, maxMonths, label }: { tea: n
   const plazos = [6, 12, 18, 24, 36, 48].filter((m) => m <= maxMonths);
 
   return (
-    <div style={s.simGrid}>
+    <div className="sim-grid">
       {/* Form */}
       <div style={s.formCard}>
         <label style={s.formLabel}>Monto del crédito</label>
@@ -162,7 +162,7 @@ function PlazoFijoSim() {
   }, [monto, dias, moneda]);
 
   return (
-    <div style={s.simGrid}>
+    <div className="sim-grid">
       <div style={s.formCard}>
         <label style={s.formLabel}>Monto a depositar</label>
         <div style={s.amountBig}>{fmt(monto)}</div>
@@ -196,7 +196,7 @@ function PlazoFijoSim() {
 
 /* ── Estilos ── */
 const s: Record<string, React.CSSProperties> = {
-  tabList: { display: 'inline-flex', backgroundColor: '#fff', border: '1px solid #E0E0E8', padding: 5, borderRadius: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.06)', gap: 2, marginBottom: 32 },
+  tabList: { display: 'inline-flex', flexWrap: 'wrap' as const, backgroundColor: '#fff', border: '1px solid #E0E0E8', padding: 5, borderRadius: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.06)', gap: 2, marginBottom: 32 },
   tab: { padding: '9px 22px', fontSize: 13.5, fontWeight: 600, fontFamily: "'Inter', sans-serif", border: 'none', borderRadius: 10, cursor: 'pointer', transition: 'all 0.2s ease', whiteSpace: 'nowrap' as const },
   tabActive: { backgroundColor: '#FF0901', color: '#fff', boxShadow: '0 2px 8px rgba(255,9,1,0.25)' },
   tabInactive: { backgroundColor: 'transparent', color: '#7A7A88' },

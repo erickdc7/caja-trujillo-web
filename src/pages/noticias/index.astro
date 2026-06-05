@@ -59,6 +59,7 @@ const newsIconSvg: Record<string, string> = {
   .news-card__title{font-family:var(--font-head);font-weight:700;font-size:14.5px;color:var(--gray-900);letter-spacing:-0.02em;line-height:1.35;margin:0 0 6px}
   .news-card__excerpt{font-size:12.5px;color:var(--gray-600);line-height:1.5;margin:0}
   .news-more{text-align:center;margin-top:40px}
+  @media(max-width:1024px){.news-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:768px){.news-grid{grid-template-columns:1fr}}
 </style>
 <style is:global>.news-card__badge{position:absolute;bottom:10px;left:10px}</style>
