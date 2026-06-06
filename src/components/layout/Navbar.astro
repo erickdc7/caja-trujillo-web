@@ -78,18 +78,7 @@ const iconSvg: Record<string, string> = {
   <div class="container navbar__inner">
     <!-- Logo -->
     <a href="/" class="navbar__logo" aria-label="Caja Trujillo — Inicio">
-      <div class="navbar__mark">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <rect x="1" y="1" width="7.5" height="7.5" rx="1.5" fill="white"/>
-          <rect x="11.5" y="1" width="7.5" height="7.5" rx="1.5" fill="white"/>
-          <rect x="1" y="11.5" width="7.5" height="7.5" rx="1.5" fill="white"/>
-          <rect x="11.5" y="11.5" width="7.5" height="7.5" rx="1.5" fill="white"/>
-        </svg>
-      </div>
-      <div class="navbar__brand">
-        <span class="navbar__brand-name">Caja Trujillo</span>
-        <span class="navbar__brand-sub">Microfinanzas del Perú</span>
-      </div>
+      <img src="/caja-trujillo-logo.png" alt="Caja Trujillo" class="navbar__logo-img" width="160" height="40" />
     </a>
 
     <!-- Navegación principal -->
@@ -249,36 +238,11 @@ const iconSvg: Record<string, string> = {
     flex-shrink: 0;
   }
 
-  .navbar__mark {
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--red-500);
-    border-radius: 11px;
-    box-shadow: var(--shadow-red);
-  }
-
-  .navbar__brand {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .navbar__brand-name {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--gray-900);
-    line-height: 1.2;
-  }
-
-  .navbar__brand-sub {
-    font-size: 10px;
-    color: var(--gray-500);
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    line-height: 1.2;
+  .navbar__logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
+    border-radius: 6px;
   }
 
   /* ===================================================
