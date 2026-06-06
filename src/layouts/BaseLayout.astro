@@ -68,10 +68,8 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     </noscript>
 
     <!-- Estilos globales -->
-    <style>
-      @import '../styles/tokens.css';
+    <style is:global>
       @import '../styles/global.css';
-      @import '../styles/animations.css';
     </style>
   </head>
   <body>

@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface Tab {
   label: string;
@@ -7,11 +7,28 @@ interface Tab {
 
 interface Props {
   tabs: Tab[];
-  children: ReactNode[];
+  children: React.ReactNode;
 }
 
 export default function ProductTabs({ tabs, children }: Props) {
   const [activeTab, setActiveTab] = useState(tabs[0]?.panelId ?? '');
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  /* ── Sync visible panel with activeTab via DOM ── */
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const panels = containerRef.current.querySelectorAll<HTMLElement>('[data-panel]');
+    panels.forEach((panel) => {
+      const id = panel.getAttribute('data-panel');
+      if (id === activeTab) {
+        panel.style.display = 'grid';
+        panel.removeAttribute('hidden');
+      } else {
+        panel.style.display = 'none';
+        panel.setAttribute('hidden', '');
+      }
+    });
+  }, [activeTab]);
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
     const currentIndex = tabs.findIndex((t) => t.panelId === activeTab);
@@ -34,7 +51,7 @@ export default function ProductTabs({ tabs, children }: Props) {
   }
 
   return (
-    <div>
+    <div ref={containerRef}>
       {/* Tab list */}
       <div style={styles.tabList} role="tablist" aria-label="Categorías de productos">
         {tabs.map((tab) => {
@@ -72,22 +89,8 @@ export default function ProductTabs({ tabs, children }: Props) {
         })}
       </div>
 
-      {/* Panels */}
-      {tabs.map((tab, index) => {
-        const isActive = activeTab === tab.panelId;
-        return (
-          <div
-            key={tab.panelId}
-            id={`panel-${tab.panelId}`}
-            role="tabpanel"
-            aria-labelledby={`tab-${tab.panelId}`}
-            hidden={!isActive}
-            style={{ display: isActive ? 'grid' : 'none' }}
-          >
-            {children[index]}
-          </div>
-        );
-      })}
+      {/* Panels — Astro renders slotted content here as static HTML */}
+      <div>{children}</div>
     </div>
   );
 }
@@ -104,6 +107,7 @@ const styles: Record<string, React.CSSProperties> = {
     boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
     gap: 2,
     marginBottom: 28,
+    flexWrap: 'wrap' as const,
   },
   tab: {
     padding: '9px 22px',

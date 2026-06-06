@@ -9,6 +9,11 @@
 @import "./tokens.css";
 @import "./animations.css";
 
+/* Disable Tailwind's built-in container to use our custom one */
+@utility container {
+  --tw-container: 1;
+}
+
 /* ===================================================
    GOOGLE FONTS — loaded via <link> in BaseLayout.astro
    Plus Jakarta Sans (headings): 600, 700, 800

@@ -49,15 +49,15 @@ const newsIconSvg: Record<string, string> = {
         { label: 'Seguros', panelId: 'seguros' },
       ]}>
         {/* Panel personas */}
-        <div class="products-grid">
+        <div class="products-grid" data-panel="personas" role="tabpanel" aria-labelledby="tab-personas" id="panel-personas">
           {productsPersonas.map((p: any) => <Card product={p} featured={p.featured} />)}
         </div>
         {/* Panel negocios */}
-        <div class="products-grid">
+        <div class="products-grid" data-panel="negocios" role="tabpanel" aria-labelledby="tab-negocios" id="panel-negocios" hidden>
           {productsNegocios.map((p: any) => <Card product={p} featured={p.featured} />)}
         </div>
         {/* Panel seguros */}
-        <div class="products-grid">
+        <div class="products-grid" data-panel="seguros" role="tabpanel" aria-labelledby="tab-seguros" id="panel-seguros" hidden>
           {productsSeguros.map((p: any) => <Card product={p} />)}
         </div>
       </ProductTabs>
