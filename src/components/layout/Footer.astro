@@ -12,18 +12,7 @@
       <!-- Col 1 — Brand -->
       <div class="footer__brand">
         <a href="/" class="footer__logo" aria-label="Caja Trujillo — Inicio">
-          <div class="footer__mark">
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <rect x="1" y="1" width="7.5" height="7.5" rx="1.5" fill="white"/>
-              <rect x="11.5" y="1" width="7.5" height="7.5" rx="1.5" fill="white"/>
-              <rect x="1" y="11.5" width="7.5" height="7.5" rx="1.5" fill="white"/>
-              <rect x="11.5" y="11.5" width="7.5" height="7.5" rx="1.5" fill="white"/>
-            </svg>
-          </div>
-          <div>
-            <span class="footer__name">Caja Trujillo</span>
-            <span class="footer__sub">Microfinanzas del Perú</span>
-          </div>
+          <img src="/caja-trujillo-logo.png" alt="Caja Trujillo" class="footer__logo-img" width="160" height="40" />
         </a>
         <p class="footer__desc">
           Caja Municipal de Ahorro y Crédito de Trujillo S.A. — Impulsando emprendedores y familias peruanas desde 1982.
@@ -163,31 +152,11 @@
     margin-bottom: 16px;
   }
 
-  .footer__mark {
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--red-500);
-    border-radius: 10px;
-  }
-
-  .footer__name {
+  .footer__logo-img {
+    height: 40px;
+    width: auto;
     display: block;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 14.5px;
-    color: var(--white);
-    line-height: 1.2;
-  }
-
-  .footer__sub {
-    display: block;
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.45);
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
+    border-radius: 6px;
   }
 
   .footer__desc {
