@@ -67,48 +67,42 @@
     "id": "crece-mujer",
     "slug": "crece-mujer",
     "icon": "Heart",
-    "badge": "Crédito especial",
-    "badgeVariant": "red",
-    "name": "Crece Mujer",
-    "shortDesc": "Línea de crédito con tasa preferencial diseñada para mujeres emprendedoras del Perú.",
-    "feature": "Tasa preferencial exclusiva",
-    "cta": "Conocer más",
+    "badge": "Cuenta de ahorros",
+    "badgeVariant": "yellow",
+    "name": "Cuenta Crece Mujer",
+    "shortDesc": "La cuenta de ahorros diseñada para ti, con beneficios exclusivos y sin costo de mantenimiento.",
+    "feature": "SIN costo de mantenimiento",
+    "cta": "Abrir cuenta",
     "ctaHref": "/para-ti/ahorro/crece-mujer",
     "featured": false,
-    "minAmount": 500,
-    "maxAmount": 30000,
-    "maxMonths": 36,
-    "tea": 32.0,
     "benefits": [
       {
-        "icon": "Percent",
-        "title": "Tasa diferenciada",
-        "desc": "Condiciones preferenciales exclusivas para titulares mujeres"
+        "icon": "Shield",
+        "title": "Plan Mujer Segura",
+        "desc": "Con saldo promedio de S/ 500, accedes gratuitamente al Plan Mujer Segura"
       },
       {
-        "icon": "Users",
-        "title": "Asesoría incluida",
-        "desc": "Acompañamiento financiero durante todo el crédito"
+        "icon": "CircleDollarSign",
+        "title": "Sin costo de mantenimiento",
+        "desc": "Mantén tu cuenta activa sin pagar comisiones mensuales"
       },
       {
-        "icon": "Clock",
-        "title": "Trámite ágil",
-        "desc": "Proceso simplificado y rápido de evaluación"
+        "icon": "CreditCard",
+        "title": "Sin monto mínimo",
+        "desc": "Abre tu cuenta sin importe mínimo de apertura"
       },
       {
-        "icon": "Award",
-        "title": "Capacitación",
-        "desc": "Acceso a talleres de educación financiera y empresarial"
+        "icon": "Smartphone",
+        "title": "Banca digital gratis",
+        "desc": "Homebanking y App Móvil sin costo adicional"
       }
     ],
     "requirements": [
-      "DNI vigente",
-      "Ser mujer mayor de 18 años",
-      "Tener actividad económica o negocio",
-      "Sin aval hasta S/ 5,000"
+      "Solo necesitas tu número de D.O.I (Documento Oficial de Identidad)",
+      "Máximo una cuenta en soles por cliente"
     ],
-    "metaTitle": "Crece Mujer — Crédito para mujeres emprendedoras | Caja Trujillo",
-    "metaDesc": "Crédito especial con tasa preferencial para mujeres emprendedoras en Caja Trujillo."
+    "metaTitle": "Cuenta Crece Mujer — Cuenta de ahorros con beneficios exclusivos | Caja Trujillo",
+    "metaDesc": "Abre tu Cuenta Crece Mujer en Caja Trujillo. Sin costo de mantenimiento, sin monto mínimo, con beneficios exclusivos como el Plan Mujer Segura."
   },
   {
     "id": "cuenta-simple",

@@ -1,128 +1,782 @@
 ---
-import PageLayout from '../../../layouts/PageLayout.astro';
-import BreadCrumb from '../../../components/shared/BreadCrumb.astro';
-import Badge from '../../../components/ui/Badge.astro';
-import Button from '../../../components/ui/Button.astro';
-import SectionHeader from '../../../components/ui/SectionHeader.astro';
-import Card from '../../../components/ui/Card.astro';
-import CTABand from '../../../components/shared/CTABand.astro';
-import CreditSimulator from '../../../components/react/CreditSimulator';
-import products from '../../../data/products-personas.json';
+import PageLayout from "../../../layouts/PageLayout.astro";
+import BreadCrumb from "../../../components/shared/BreadCrumb.astro";
+import Button from "../../../components/ui/Button.astro";
+import SectionHeader from "../../../components/ui/SectionHeader.astro";
+import Card from "../../../components/ui/Card.astro";
+import CTABand from "../../../components/shared/CTABand.astro";
+import products from "../../../data/products-personas.json";
 
-const product = products.find((p: any) => p.slug === 'crece-mujer')!;
-const related = products.filter((p: any) => p.slug !== 'crece-mujer').slice(0, 3);
-const iconSvg: Record<string, string> = {
-  Percent: '<line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
-  Users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
-  Clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
-  Award: '<path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/>',
-};
+const product = products.find((p: any) => p.slug === "crece-mujer")!;
+const related = products
+  .filter((p: any) => p.slug !== "crece-mujer")
+  .slice(0, 3);
 ---
 
-<PageLayout title={product.metaTitle} description={product.metaDesc}>
-  <section class="prod-hero" style="--glow-color: rgba(139,26,107,0.15)">
-    <div class="prod-hero__glow" aria-hidden="true"></div>
-    <div class="container prod-hero__inner">
-      <div class="prod-hero__text">
-        <BreadCrumb items={[{ label: 'Inicio', href: '/' }, { label: 'Para ti', href: '/para-ti/' }, { label: 'Crece Mujer' }]} />
-        <Badge variant="tag-red" text={product.badge} />
-        <h1 class="prod-hero__title">El crédito que impulsa a la mujer que hace empresa</h1>
-        <p class="prod-hero__desc">{product.shortDesc}</p>
-        <div class="prod-hero__stats">
-          <div class="prod-hero__stat"><span class="prod-hero__stat-num">S/ 500</span><span class="prod-hero__stat-label">Desde</span></div>
-          <div class="prod-hero__stat"><span class="prod-hero__stat-num">36 meses</span><span class="prod-hero__stat-label">Hasta</span></div>
-          <div class="prod-hero__stat"><span class="prod-hero__stat-num">32% TEA</span><span class="prod-hero__stat-label">Tasa</span></div>
+<PageLayout
+  title="Cuenta Crece Mujer | Caja Trujillo"
+  description="Cuenta Crece Mujer - Caja Municipal de Ahorro y Crédito de Trujillo"
+>
+  <section class="page-hero">
+    <div class="page-hero__bg"></div>
+    <div class="page-hero__circle"></div>
+    <div class="container page-hero__inner">
+      <div class="page-hero__content">
+        <BreadCrumb
+          items={[
+            { label: "Inicio", href: "/" },
+            { label: "Para ti", href: "/para-ti/" },
+            { label: "Ahorro", href: "/para-ti/ahorro/" },
+            { label: "Crece Mujer" },
+          ]}
+        />
+        <h1 class="page-hero__title">Cuenta Crece Mujer</h1>
+        <p class="page-hero__desc">
+          La cuenta de ahorros diseñada para ti, con beneficios exclusivos y sin
+          costo de mantenimiento.
+        </p>
+        <div class="page-hero__btns">
+          <Button
+            variant="primary"
+            size="lg"
+            href="/canales-digitales/"
+            iconRight="ArrowRight">Abrir cuenta</Button
+          >
+          <Button variant="ghost" size="lg" href="#beneficios"
+            >Ver beneficios</Button
+          >
         </div>
-        <div class="prod-hero__btns">
-          <Button variant="primary" size="lg" href="/simuladores" iconRight="ArrowRight">Solicitar Crece Mujer</Button>
-          <Button variant="ghost" size="lg" href="#requisitos">Ver requisitos</Button>
-        </div>
-      </div>
-      <div class="prod-hero__sim">
-        <CreditSimulator client:visible initialAmount={5000} maxAmount={product.maxAmount} minAmount={product.minAmount} maxMonths={product.maxMonths} tea={product.tea} productName="Crece Mujer" ctaHref="/simuladores" />
       </div>
     </div>
   </section>
 
-  <section class="benefits-sec"><div class="container">
-    <SectionHeader eyebrow="Ventajas" title="¿Por qué elegir Crece Mujer?" />
-    <div class="benefits-grid">
-      {product.benefits?.map((b: any) => (
-        <div class="benefit-card">
-          <div class="benefit-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={iconSvg[b.icon] || ''} /></div>
-          <h3 class="benefit-title">{b.title}</h3>
-          <p class="benefit-desc">{b.desc}</p>
+  <section class="benefits-sec" id="beneficios">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Beneficios"
+        title="Todo lo que te ofrece tu cuenta"
+      />
+      <div class="benefits-list">
+        <div class="benefit-item">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="benefit-check"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+              d="m9 11 3 3L22 4"></path>
+          </svg>
+          <span
+            >Plan Mujer Segura gratuito al mantener un saldo promedio desde S/ 500 (sujeto a T&C en la Cartilla Informativa).</span
+          >
         </div>
-      ))}
+        <div class="benefit-item">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="benefit-check"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+              d="m9 11 3 3L22 4"></path>
+          </svg>
+          <span>Cero costo de mantenimiento y apertura de cuenta sin monto mínimo requerido.</span>
+        </div>
+        <div class="benefit-item">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="benefit-check"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+              d="m9 11 3 3L22 4"></path>
+          </svg>
+          <span>Retiros y depósitos ilimitados sin comisión en todos nuestros agentes corresponsales.</span>
+        </div>
+        <div class="benefit-item">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="benefit-check"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+              d="m9 11 3 3L22 4"></path>
+          </svg>
+          <span
+            >Hasta 2 retiros y 10 depósitos mensuales gratis por ventanilla.</span
+          >
+        </div>
+        <div class="benefit-item">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="benefit-check"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+              d="m9 11 3 3L22 4"></path>
+          </svg>
+          <span
+            >Consultas digitales sin costo para revisar saldos y movimientos desde Caja Trujillo Móvil o Banca Personas (requiere afiliación).</span
+          >
+        </div>
+        <div class="benefit-item">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="benefit-check"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+              d="m9 11 3 3L22 4"></path>
+          </svg>
+          <span>Compras nacionales sin comisiones en cualquier establecimiento físico o virtual afiliado a Visa.</span>
+        </div>
+        <div class="benefit-item">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="benefit-check"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+              d="m9 11 3 3L22 4"></path>
+          </svg>
+          <span>Afiliación directa a Yape para enviar y recibir dinero desde tu cuenta de ahorros.</span>
+        </div>
+        
+         
+        
+        <div class="benefit-item">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="benefit-check"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+              d="m9 11 3 3L22 4"></path>
+          </svg>
+          <span
+            >Ahorros 100% protegidos por el respaldo del Fondo de Seguro de Depósitos. Más información: <a
+              href="https://www.fsd.org.pe"
+              target="_blank"
+              rel="noopener noreferrer">www.fsd.org.pe</a
+            ></span
+          >
+        </div>
+      </div>
+      <div class="opening-info">
+        <div class="opening-info__icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle
+              cx="12"
+              cy="7"
+              r="4"></circle>
+          </svg>
+        </div>
+        <p>
+          Abre tu cuenta en toda nuestra red de tiendas (ventanilla),
+          Homebanking y App Móvil.
+        </p>
+      </div>
     </div>
-  </div></section>
+  </section>
 
-  <section class="req-sec" id="requisitos"><div class="container">
-    <SectionHeader eyebrow="Requisitos" title="¿Qué necesitas?" />
-    <div class="req-grid">
-      <ul class="req-list" role="list">
-        {product.requirements?.map((r: string) => (
-          <li class="req-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="req-check"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span>{r}</span></li>
-        ))}
-      </ul>
-      <div class="req-contact">
-        <h3 class="req-contact__title">¿Tienes dudas? Contáctanos</h3>
-        <div class="req-contact__list">
-          <div class="req-contact__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Llámanos: 0800-41-888 (gratuito)</div>
-          <div class="req-contact__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Visita tu agencia más cercana</div>
-          <div class="req-contact__item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Chat en línea</div>
+  <section class="banner-sec">
+    <div class="container">
+      <img
+        src="/para-ti/crece-mujer/banner.png"
+        alt="Banner Cuenta Crece Mujer"
+        class="banner-img"
+        width="1200"
+        height="400"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <section class="req-sec" id="requisitos">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Requisitos"
+        title="¿Qué necesitas para abrir tu cuenta?"
+      />
+      <div class="req-grid">
+        <div class="req-card">
+          <h3 class="req-card__title">Persona Natural</h3>
+          <ul class="req-list" role="list">
+            <li class="req-item">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                class="req-check"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+                  d="m9 11 3 3L22 4"></path>
+              </svg>
+              <span
+                >Solo necesitas tu número de D.O.I (Documento Oficial de
+                Identidad)</span
+              >
+            </li>
+            <li class="req-item">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                class="req-check"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+                  d="m9 11 3 3L22 4"></path>
+              </svg>
+              <span>Máximo una cuenta en soles por cliente</span>
+            </li>
+          </ul>
+        </div>
+        <div class="req-card">
+          <h3 class="req-card__title">Persona Jurídica</h3>
+          <ul class="req-list" role="list">
+            <li class="req-item">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                class="req-check"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path
+                  d="m9 11 3 3L22 4"></path>
+              </svg>
+              <span>No aplica</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-  </div></section>
+  </section>
 
-  <section class="related-sec"><div class="container">
-    <h2 class="related-title">También te puede interesar</h2>
-    <div class="related-grid">{related.map((p: any) => <Card product={p} />)}</div>
-  </div></section>
+  <section class="example-sec">
+    <div class="container">
+      <SectionHeader eyebrow="Ejemplo" title="Calcula tus intereses" />
+      <div class="example-card">
+        <div class="example-card__header">
+          <div class="example-card__icon">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" x2="12" y1="2" y2="22"></line><path
+                d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <div>
+            <h4 class="example-card__title">Cálculo de ejemplo</h4>
+            <p class="example-card__subtitle">Depósito a plazo fijo</p>
+          </div>
+        </div>
+        <div class="example-card__content">
+          <div class="example-row">
+            <span class="example-row__label">Monto de apertura:</span>
+            <span class="example-row__value">S/ 1,000</span>
+          </div>
+          <div class="example-row">
+            <span class="example-row__label">Plazo:</span>
+            <span class="example-row__value">360 días</span>
+          </div>
+          <div class="example-row">
+            <span class="example-row__label">TREA:</span>
+            <span class="example-row__value">1%</span>
+          </div>
+          <div class="example-row example-row--highlight">
+            <span class="example-row__label">Intereses generados:</span>
+            <span class="example-row__value example-row__value--accent"
+              >S/ 10</span
+            >
+          </div>
+          <div class="example-row">
+            <span class="example-row__label">Saldo mínimo de equilibrio:</span>
+            <span class="example-row__value">S/ 0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="links-sec">
+    <div class="container">
+      <SectionHeader eyebrow="Documentos" title="Información adicional" />
+      <div class="links-grid">
+        <a href="#" class="link-card">COMISIONES</a>
+        <a href="#" class="link-card">FÓRMULAS</a>
+        <a href="#" class="link-card">BENEFICIOS, RIESGOS Y CONDICIONES</a>
+        <a href="#" class="link-card">TASAS</a>
+        <a href="#" class="link-card">RECOMENDACIONES DE SEGURIDAD</a>
+        <a href="#" class="link-card">COMISIONES TRANSVERSALES</a>
+        <a href="#" class="link-card">CONTRATO</a>
+        <a href="#" class="link-card">CARTILLA INFORMATIVA</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="related-sec">
+    <div class="container">
+      <h2 class="related-title">También te puede interesar</h2>
+      <div class="related-grid">
+        {related.map((p: any) => <Card product={p} />)}
+      </div>
+    </div>
+  </section>
 
   <CTABand />
 </PageLayout>
 
 <style>
-  .prod-hero { background-color: var(--gray-950); min-height: 400px; position: relative; overflow: hidden; }
-  .prod-hero__glow { position: absolute; top: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, var(--glow-color, rgba(255,9,1,0.14)) 0%, transparent 70%); pointer-events: none; }
-  .prod-hero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 380px; gap: 48px; padding: 80px 0; }
-  .prod-hero__title { font-family: var(--font-head); font-weight: 800; color: var(--white); font-size: clamp(1.8rem,3.5vw,2.4rem); letter-spacing: -0.04em; margin: 12px 0 12px; line-height: 1.15; }
-  .prod-hero__desc { font-size: 16px; color: rgba(255,255,255,0.65); margin: 0 0 20px; line-height: 1.6; }
-  .prod-hero__stats { display: flex; gap: 24px; padding: 16px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 24px; }
-  .prod-hero__stat-num { display: block; font-family: var(--font-head); font-weight: 700; font-size: 18px; color: var(--white); }
-  .prod-hero__stat-label { font-size: 12px; color: rgba(255,255,255,0.50); }
-  .prod-hero__btns { display: flex; gap: 12px; flex-wrap: wrap; }
-  .prod-hero__sim { display: flex; align-items: center; }
-  .benefits-sec { background-color: var(--white); padding: 72px 0; }
-  .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; }
-  .benefit-card { padding: 24px; border: 1px solid var(--gray-200); border-radius: var(--r-lg); transition: all 0.2s ease; }
-  .benefit-card:hover { box-shadow: var(--shadow-sm); border-color: var(--red-200); }
-  .benefit-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background-color: var(--red-50); border: 1px solid var(--red-100); border-radius: 14px; margin-bottom: 14px; }
-  .benefit-icon svg { color: var(--red-500); }
-  .benefit-title { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--gray-900); margin: 0 0 6px; }
-  .benefit-desc { font-size: 14px; color: var(--gray-600); margin: 0; line-height: 1.5; }
-  .req-sec { background-color: var(--white); padding: 72px 0; }
-  .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 32px; }
-  .req-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
-  .req-item { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: var(--gray-700); font-weight: 500; }
-  .req-check { color: var(--red-500); flex-shrink: 0; }
-  .req-contact { background-color: var(--red-50); border: 1px solid var(--red-200); border-radius: var(--r-xl); padding: 28px; }
-  .req-contact__title { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--red-600); margin: 0 0 16px; }
-  .req-contact__list { display: flex; flex-direction: column; gap: 12px; }
-  .req-contact__item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--gray-700); font-weight: 500; }
-  .req-contact__item svg { color: var(--red-500); flex-shrink: 0; }
-  .related-sec { background-color: var(--gray-50); padding: 48px 0; }
-  .related-title { font-family: var(--font-head); font-weight: 700; font-size: 20px; color: var(--gray-900); margin: 0 0 24px; }
-  .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  @media (max-width: 1024px) {
-    .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .page-hero {
+    padding: 100px 0 120px;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
   }
+  .page-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("/para-ti/crece-mujer/portada.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+  .page-hero__circle {
+    position: absolute;
+    width: 1400px;
+    height: 1400px;
+    background: linear-gradient(135deg, #8100A3 0%, #8100A3 100%);
+    border-radius: 50%;
+    top: -45%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    opacity: 0.75;
+  }
+  .page-hero__inner {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    /* max-width: 700px; */
+  }
+  .page-hero__content {
+    display: flex;
+    flex-direction: column;
+  }
+  .page-hero__title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    color: var(--white);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: -0.03em;
+    margin: 16px 0 20px;
+    line-height: 1.1;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  }
+  .page-hero__desc {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 0 32px;
+    max-width: 580px;
+    line-height: 1.6;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  }
+  .page-hero__btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .benefits-sec {
+    background-color: var(--white);
+    padding: 72px 0;
+  }
+  .benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14.5px;
+    color: var(--gray-700);
+    line-height: 1.6;
+  }
+  .benefit-check {
+    color: var(--red-500);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .benefit-item a {
+    color: var(--red-600);
+    text-decoration: underline;
+  }
+  .benefit-item a:hover {
+    color: var(--red-700);
+  }
+  .opening-info {
+    margin-top: 32px;
+    padding: 24px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.7)
+    );
+    border: 1px solid rgba(220, 38, 38, 0.1);
+    border-radius: var(--r-lg);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    backdrop-filter: blur(10px);
+  }
+  .opening-info__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--red-500), var(--red-600));
+    border-radius: 12px;
+    flex-shrink: 0;
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+  }
+  .opening-info p {
+    font-size: 15px;
+    color: var(--gray-700);
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .banner-sec {
+    background-color: var(--gray-50);
+    padding: 48px 0;
+  }
+  .banner-img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .req-sec {
+    background-color: var(--white);
+    padding: 72px 0;
+  }
+  .req-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .req-card {
+    padding: 28px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-lg);
+    background-color: var(--white);
+  }
+  .req-card:hover {
+    border-color: var(--red-200);
+    box-shadow: var(--shadow-sm);
+  }
+  .req-card__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--gray-900);
+    margin: 0 0 20px;
+  }
+  .req-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .req-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14.5px;
+    color: var(--gray-700);
+    font-weight: 500;
+  }
+  .req-check {
+    color: var(--red-500);
+    flex-shrink: 0;
+  }
+
+  .example-sec {
+    background-color: var(--gray-50);
+    padding: 72px 0;
+  }
+  .example-card {
+    margin-top: 32px;
+    padding: 0;
+    background-color: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .example-card__header {
+    padding: 24px 32px;
+    background: linear-gradient(135deg, var(--red-500), var(--red-600));
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .example-card__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+  }
+  .example-card__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+    margin: 0;
+  }
+  .example-card__subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 4px 0 0 0;
+  }
+  .example-card__content {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .example-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .example-row:last-child {
+    border-bottom: none;
+  }
+  .example-row--highlight {
+    background: linear-gradient(90deg, rgba(220, 38, 38, 0.05), transparent);
+    margin: 8px -16px;
+    padding: 16px;
+    border-radius: 8px;
+    border-bottom: none;
+  }
+  .example-row__label {
+    font-size: 14px;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+  .example-row__value {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--gray-900);
+  }
+  .example-row__value--accent {
+    color: var(--red-600);
+    font-size: 18px;
+  }
+
+  .links-sec {
+    background-color: var(--white);
+    padding: 72px 0;
+  }
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .link-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 16px;
+    background-color: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--r-lg);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .link-card:hover {
+    border-color: var(--red-500);
+    color: var(--red-600);
+    background-color: var(--red-50);
+    transform: translateY(-2px);
+  }
+
+  .related-sec {
+    background-color: var(--gray-50);
+    padding: 72px 0;
+  }
+  .related-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--gray-900);
+    margin: 0 0 32px;
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 1024px) {
+    .page-hero {
+      padding: 80px 0 100px;
+      min-height: 500px;
+    }
+    .page-hero__circle {
+      width: 400px;
+      height: 400px;
+    }
+    .page-hero__title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    }
+    .page-hero__inner {
+      max-width: 100%;
+    }
+    .links-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 768px) {
-    .prod-hero__inner { grid-template-columns: 1fr; padding: 48px 0; }
-    .prod-hero__sim { display: none; }
-    .prod-hero__stats { gap: 16px; flex-wrap: wrap; }
-    .benefits-grid, .req-grid, .related-grid { grid-template-columns: 1fr; }
+    .page-hero {
+      padding: 60px 0 80px;
+      min-height: 450px;
+    }
+    .page-hero__circle {
+      width: 300px;
+      height: 300px;
+      filter: blur(40px);
+    }
+    .page-hero__title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+    }
+    .page-hero__desc {
+      font-size: 15px;
+    }
+    .req-grid {
+      grid-template-columns: 1fr;
+    }
+    .links-grid {
+      grid-template-columns: 1fr;
+    }
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+    .page-hero__btns {
+      flex-direction: column;
+      width: 100%;
+    }
+    .page-hero__btns button {
+      width: 100%;
+    }
   }
 </style>
