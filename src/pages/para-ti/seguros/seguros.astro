@@ -1,5 +1,5 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';import BreadCrumb from '../../components/shared/BreadCrumb.astro';import Button from '../../components/ui/Button.astro';import CTABand from '../../components/shared/CTABand.astro';import products from '../../data/products-personas.json';
+import PageLayout from '../../../layouts/PageLayout.astro';import BreadCrumb from '../../../components/shared/BreadCrumb.astro';import Button from '../../../components/ui/Button.astro';import CTABand from '../../../components/shared/CTABand.astro';import products from '../../../data/products-personas.json';
 const p = products.find((x:any)=>x.slug==='seguros')!;
 ---
 <PageLayout title={p.metaTitle} description={p.metaDesc}>

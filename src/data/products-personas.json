@@ -9,7 +9,7 @@
     "shortDesc": "Obtén liquidez inmediata dejando tus joyas como garantía. Proceso en minutos, sin burocracia.",
     "feature": "Aprobación el mismo día",
     "cta": "Solicitar ahora",
-    "ctaHref": "/para-ti/credijoya",
+    "ctaHref": "/para-ti/credito-personal/credijoya",
     "featured": true,
     "minAmount": 200,
     "maxAmount": 50000,
@@ -73,7 +73,7 @@
     "shortDesc": "Línea de crédito con tasa preferencial diseñada para mujeres emprendedoras del Perú.",
     "feature": "Tasa preferencial exclusiva",
     "cta": "Conocer más",
-    "ctaHref": "/para-ti/crece-mujer",
+    "ctaHref": "/para-ti/ahorro/crece-mujer",
     "featured": false,
     "minAmount": 500,
     "maxAmount": 30000,
@@ -120,7 +120,7 @@
     "shortDesc": "Abre tu cuenta sin comisiones, sin monto mínimo y con tarjeta Visa incluida desde el día uno.",
     "feature": "Sin costo de mantenimiento",
     "cta": "Abrir cuenta",
-    "ctaHref": "/para-ti/cuenta-simple",
+    "ctaHref": "/para-ti/ahorro/cuenta-simple",
     "featured": false,
     "benefits": [
       {
@@ -163,7 +163,7 @@
     "shortDesc": "Maximiza el rendimiento de tu dinero con tasas hasta 8% TEA. Plazos desde 30 días.",
     "feature": "Hasta 8% TEA garantizado",
     "cta": "Ver tasas",
-    "ctaHref": "/para-ti/plazo-fijo",
+    "ctaHref": "/para-ti/ahorro/plazo-fijo",
     "featured": false,
     "metaTitle": "Depósito a Plazo Fijo | Caja Trujillo",
     "metaDesc": "Invierte con seguridad en Caja Trujillo. Tasas hasta 8% TEA, plazos desde 30 días."
@@ -178,7 +178,7 @@
     "shortDesc": "Financia la compra, construcción o mejora de tu vivienda con condiciones flexibles.",
     "feature": "Hasta 20 años de plazo",
     "cta": "Simular crédito",
-    "ctaHref": "/para-ti/hipotecaja",
+    "ctaHref": "/para-ti/vivienda/hipotecaja",
     "featured": false,
     "metaTitle": "Hipotecaja+ — Crédito hipotecario | Caja Trujillo",
     "metaDesc": "Financia tu vivienda en Caja Trujillo. Compra, construcción o mejora con plazo hasta 20 años."
@@ -193,7 +193,7 @@
     "shortDesc": "Vida, sepelio y oncológico. Protege a tu familia ante cualquier imprevisto desde S/ 18/mes.",
     "feature": "Desde S/ 18 al mes",
     "cta": "Ver coberturas",
-    "ctaHref": "/para-ti/seguros",
+    "ctaHref": "/para-ti/seguros/seguros",
     "featured": false,
     "metaTitle": "Seguros de vida, sepelio y oncológico | Caja Trujillo",
     "metaDesc": "Seguros de vida, sepelio y oncológico en Caja Trujillo. Cobertura familiar desde S/ 18 al mes."

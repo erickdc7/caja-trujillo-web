@@ -9,7 +9,7 @@
     "shortDesc": "Protege el futuro de tu familia con una cobertura de vida desde S/ 18 al mes.",
     "feature": "Desde S/ 18 al mes",
     "cta": "Ver coberturas",
-    "ctaHref": "/para-ti/seguros",
+    "ctaHref": "/para-ti/seguros/seguro-vida-integral",
     "featured": false,
     "benefits": [
       {
@@ -46,7 +46,7 @@
     "shortDesc": "Cobertura integral de gastos de sepelio para ti y toda tu familia. Tranquilidad garantizada.",
     "feature": "Cobertura familiar incluida",
     "cta": "Conocer más",
-    "ctaHref": "/para-ti/seguros",
+    "ctaHref": "/para-ti/seguros/seguro-sepelio",
     "featured": false,
     "benefits": [
       {
@@ -83,7 +83,7 @@
     "shortDesc": "Cobertura especializada ante diagnóstico de cáncer. Tratamiento sin preocupaciones económicas.",
     "feature": "Cobertura hasta S/ 150,000",
     "cta": "Ver beneficios",
-    "ctaHref": "/para-ti/seguros",
+    "ctaHref": "/para-ti/seguros/seguro-oncologico",
     "featured": false,
     "benefits": [
       {

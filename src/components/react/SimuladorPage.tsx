@@ -188,7 +188,7 @@ function PlazoFijoSim() {
           <div><span style={s.metricLabel}>Moneda</span><span style={s.metricVal}>{moneda}</span></div>
         </div>
         <p style={s.disclaimer}>Simulación referencial. Las tasas pueden variar. Consulta en agencia.</p>
-        <a href="/para-ti/plazo-fijo" style={s.ctaBtn}>Abrir plazo fijo</a>
+        <a href="/para-ti/ahorro/plazo-fijo" style={s.ctaBtn}>Abrir plazo fijo</a>
       </div>
     </div>
   );

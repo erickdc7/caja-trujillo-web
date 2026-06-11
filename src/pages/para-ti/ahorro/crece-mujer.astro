@@ -1,56 +1,51 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import BreadCrumb from '../../components/shared/BreadCrumb.astro';
-import Badge from '../../components/ui/Badge.astro';
-import Button from '../../components/ui/Button.astro';
-import SectionHeader from '../../components/ui/SectionHeader.astro';
-import Card from '../../components/ui/Card.astro';
-import CTABand from '../../components/shared/CTABand.astro';
-import CreditSimulator from '../../components/react/CreditSimulator';
-import products from '../../data/products-personas.json';
+import PageLayout from '../../../layouts/PageLayout.astro';
+import BreadCrumb from '../../../components/shared/BreadCrumb.astro';
+import Badge from '../../../components/ui/Badge.astro';
+import Button from '../../../components/ui/Button.astro';
+import SectionHeader from '../../../components/ui/SectionHeader.astro';
+import Card from '../../../components/ui/Card.astro';
+import CTABand from '../../../components/shared/CTABand.astro';
+import CreditSimulator from '../../../components/react/CreditSimulator';
+import products from '../../../data/products-personas.json';
 
-const product = products.find((p: any) => p.slug === 'credijoya')!;
-const related = products.filter((p: any) => p.slug !== 'credijoya').slice(0, 3);
+const product = products.find((p: any) => p.slug === 'crece-mujer')!;
+const related = products.filter((p: any) => p.slug !== 'crece-mujer').slice(0, 3);
 const iconSvg: Record<string, string> = {
-  Zap: '<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
-  Shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
-  RefreshCw: '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/>',
-  TrendingDown: '<polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/>',
-  Gem: '<path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/>',
-  Search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
-  Banknote: '<rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/>',
+  Percent: '<line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
+  Users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  Clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  Award: '<path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/>',
 };
 ---
 
 <PageLayout title={product.metaTitle} description={product.metaDesc}>
-  <!-- Product Hero -->
-  <section class="prod-hero">
+  <section class="prod-hero" style="--glow-color: rgba(139,26,107,0.15)">
     <div class="prod-hero__glow" aria-hidden="true"></div>
     <div class="container prod-hero__inner">
       <div class="prod-hero__text">
-        <BreadCrumb items={[{ label: 'Inicio', href: '/' }, { label: 'Para ti', href: '/para-ti/' }, { label: 'Credijoya' }]} />
-        <Badge variant="tag-yellow" text={product.badge} />
-        <h1 class="prod-hero__title">Liquidez inmediata con el respaldo de tus joyas</h1>
+        <BreadCrumb items={[{ label: 'Inicio', href: '/' }, { label: 'Para ti', href: '/para-ti/' }, { label: 'Crece Mujer' }]} />
+        <Badge variant="tag-red" text={product.badge} />
+        <h1 class="prod-hero__title">El crédito que impulsa a la mujer que hace empresa</h1>
         <p class="prod-hero__desc">{product.shortDesc}</p>
         <div class="prod-hero__stats">
-          <div class="prod-hero__stat"><span class="prod-hero__stat-num">S/ 200</span><span class="prod-hero__stat-label">Desde</span></div>
-          <div class="prod-hero__stat"><span class="prod-hero__stat-num">12 meses</span><span class="prod-hero__stat-label">Hasta</span></div>
-          <div class="prod-hero__stat"><span class="prod-hero__stat-num">Mismo día</span><span class="prod-hero__stat-label">Aprobación</span></div>
+          <div class="prod-hero__stat"><span class="prod-hero__stat-num">S/ 500</span><span class="prod-hero__stat-label">Desde</span></div>
+          <div class="prod-hero__stat"><span class="prod-hero__stat-num">36 meses</span><span class="prod-hero__stat-label">Hasta</span></div>
+          <div class="prod-hero__stat"><span class="prod-hero__stat-num">32% TEA</span><span class="prod-hero__stat-label">Tasa</span></div>
         </div>
         <div class="prod-hero__btns">
-          <Button variant="primary" size="lg" href="/simuladores" iconRight="ArrowRight">Solicitar Credijoya</Button>
+          <Button variant="primary" size="lg" href="/simuladores" iconRight="ArrowRight">Solicitar Crece Mujer</Button>
           <Button variant="ghost" size="lg" href="#requisitos">Ver requisitos</Button>
         </div>
       </div>
       <div class="prod-hero__sim">
-        <CreditSimulator client:visible initialAmount={5000} maxAmount={product.maxAmount} minAmount={product.minAmount} maxMonths={product.maxMonths} tea={product.tea} productName="Credijoya" ctaHref="/simuladores" />
+        <CreditSimulator client:visible initialAmount={5000} maxAmount={product.maxAmount} minAmount={product.minAmount} maxMonths={product.maxMonths} tea={product.tea} productName="Crece Mujer" ctaHref="/simuladores" />
       </div>
     </div>
   </section>
 
-  <!-- Benefits -->
   <section class="benefits-sec"><div class="container">
-    <SectionHeader eyebrow="Ventajas" title="¿Por qué elegir Credijoya?" />
+    <SectionHeader eyebrow="Ventajas" title="¿Por qué elegir Crece Mujer?" />
     <div class="benefits-grid">
       {product.benefits?.map((b: any) => (
         <div class="benefit-card">
@@ -62,34 +57,12 @@ const iconSvg: Record<string, string> = {
     </div>
   </div></section>
 
-  <!-- Steps -->
-  <section class="steps-sec"><div class="container">
-    <SectionHeader eyebrow="Proceso" title="En 3 pasos simples" align="center" />
-    <div class="steps-row">
-      {product.steps?.map((step: any, i: number) => (
-        <>
-          {i > 0 && <div class="steps-line" aria-hidden="true"></div>}
-          <div class="step">
-            <span class="step__num">{i + 1}</span>
-            <div class="step__icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={iconSvg[step.icon] || ''} /></div>
-            <h3 class="step__title">{step.title}</h3>
-            <p class="step__desc">{step.desc}</p>
-          </div>
-        </>
-      ))}
-    </div>
-  </div></section>
-
-  <!-- Requirements -->
   <section class="req-sec" id="requisitos"><div class="container">
     <SectionHeader eyebrow="Requisitos" title="¿Qué necesitas?" />
     <div class="req-grid">
       <ul class="req-list" role="list">
         {product.requirements?.map((r: string) => (
-          <li class="req-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="req-check"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-            <span>{r}</span>
-          </li>
+          <li class="req-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="req-check"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span>{r}</span></li>
         ))}
       </ul>
       <div class="req-contact">
@@ -103,7 +76,6 @@ const iconSvg: Record<string, string> = {
     </div>
   </div></section>
 
-  <!-- Related -->
   <section class="related-sec"><div class="container">
     <h2 class="related-title">También te puede interesar</h2>
     <div class="related-grid">{related.map((p: any) => <Card product={p} />)}</div>
@@ -114,7 +86,7 @@ const iconSvg: Record<string, string> = {
 
 <style>
   .prod-hero { background-color: var(--gray-950); min-height: 400px; position: relative; overflow: hidden; }
-  .prod-hero__glow { position: absolute; top: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,9,1,0.14) 0%, transparent 70%); pointer-events: none; }
+  .prod-hero__glow { position: absolute; top: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, var(--glow-color, rgba(255,9,1,0.14)) 0%, transparent 70%); pointer-events: none; }
   .prod-hero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 380px; gap: 48px; padding: 80px 0; }
   .prod-hero__title { font-family: var(--font-head); font-weight: 800; color: var(--white); font-size: clamp(1.8rem,3.5vw,2.4rem); letter-spacing: -0.04em; margin: 12px 0 12px; line-height: 1.15; }
   .prod-hero__desc { font-size: 16px; color: rgba(255,255,255,0.65); margin: 0 0 20px; line-height: 1.6; }
@@ -131,15 +103,6 @@ const iconSvg: Record<string, string> = {
   .benefit-icon svg { color: var(--red-500); }
   .benefit-title { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--gray-900); margin: 0 0 6px; }
   .benefit-desc { font-size: 14px; color: var(--gray-600); margin: 0; line-height: 1.5; }
-  .steps-sec { background-color: var(--gray-50); padding: 72px 0; }
-  .steps-row { display: flex; align-items: flex-start; margin-top: 40px; }
-  .step { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .step__num { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background-color: var(--red-500); color: var(--white); font-family: var(--font-head); font-weight: 700; font-size: 14px; border-radius: 50%; margin-bottom: 16px; }
-  .step__icon-wrap { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background-color: var(--red-50); border: 2px solid var(--red-100); border-radius: 50%; }
-  .step__icon-wrap svg { color: var(--red-500); }
-  .step__title { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--gray-900); margin: 12px 0 6px; }
-  .step__desc { font-size: 13.5px; color: var(--gray-600); max-width: 200px; margin: 0; line-height: 1.45; }
-  .steps-line { align-self: center; flex: 1; border-top: 2px dashed var(--red-200); margin: 0 -16px; margin-top: 48px; }
   .req-sec { background-color: var(--white); padding: 72px 0; }
   .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 32px; }
   .req-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
@@ -160,10 +123,6 @@ const iconSvg: Record<string, string> = {
     .prod-hero__inner { grid-template-columns: 1fr; padding: 48px 0; }
     .prod-hero__sim { display: none; }
     .prod-hero__stats { gap: 16px; flex-wrap: wrap; }
-    .benefits-grid { grid-template-columns: 1fr; }
-    .steps-row { flex-direction: column; align-items: center; gap: 24px; }
-    .steps-line { display: none; }
-    .req-grid { grid-template-columns: 1fr; }
-    .related-grid { grid-template-columns: 1fr; }
+    .benefits-grid, .req-grid, .related-grid { grid-template-columns: 1fr; }
   }
 </style>
